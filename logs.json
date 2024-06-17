@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1718638016539,
+    "timestamp": "2024-06-17T15:26:56.539Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "16",
+      "name": "igors",
+      "surname": "dor",
+      "email": "igord@gmail.com",
+      "phone": "0503698855"
+    }
+  },
+  {
+    "id": 1718638020056,
+    "timestamp": "2024-06-17T15:27:00.056Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718638071263,
+    "timestamp": "2024-06-17T15:27:51.263Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  }
+]

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Логи запросов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #6a0dad;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-primary {
+            background-color: #6a0dad;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .btn-primary:hover {
+            background-color: #5a0cbe;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Логи запросов</h1>
+        <button class="btn-primary" onclick="window.location.href='customer_table.html'">Назад к таблице кастомеров</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Время</th>
+                    <th>Дата</th>
+                    <th>Запрос</th>
+                    <th>Тело лога</th>
+                </tr>
+            </thead>
+            <tbody id="logsTableBody">
+                <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Получаем данные логов с сервера
+            $.get('/logs', function(data) {
+                let tableBody = $('#logsTableBody');
+                data.forEach(function(log) {
+                    let row = $('<tr></tr>');
+                    row.append($('<td></td>').text(log.id));
+                    row.append($('<td></td>').text(new Date(log.timestamp).toLocaleTimeString('ru-RU')));
+                    row.append($('<td></td>').text(new Date(log.timestamp).toLocaleDateString('ru-RU')));
+                    row.append($('<td></td>').text(log.method + ' ' + log.url));
+                    row.append($('<td></td>').text(JSON.stringify(log.body)));
+                    tableBody.append(row);
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка при получении логов:', textStatus, errorThrown);
+            });
+        });
+    </script>
+</body>
+</html>

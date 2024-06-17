@@ -41,8 +41,8 @@
         border: 1px solid #ddd;
         border-radius: 5px;
       }
-      .btn-primary {
-        background-color: #6a0dad;
+      .btn-primary,
+      .btn-clear {
         border: none;
         padding: 10px 20px;
         color: #fff;
@@ -51,8 +51,17 @@
         width: 100%;
         margin-top: 20px;
       }
+      .btn-primary {
+        background-color: #6a0dad;
+      }
       .btn-primary:hover {
         background-color: #5a0cbe;
+      }
+      .btn-clear {
+        background-color: #ff6347; /* Цвет для кнопки очистки формы */
+      }
+      .btn-clear:hover {
+        background-color: #ff4500;
       }
       .alert {
         display: none;
@@ -93,6 +102,9 @@
         </div>
         <button type="submit" class="btn-primary" id="registerButton">
           Зарегистрироваться
+        </button>
+        <button type="button" class="btn-clear" id="clearButton">
+          Очистить форму
         </button>
       </form>
     </div>
@@ -135,7 +147,6 @@
                       textStatus,
                       errorThrown
                     );
-                    console.error("Ответ сервера:", jqXHR.responseText);
                   },
                 });
               }
@@ -146,9 +157,14 @@
                 textStatus,
                 errorThrown
               );
-              console.error("Ответ сервера:", jqXHR.responseText);
             },
           });
+        });
+
+        // Обработчик события для кнопки "Очистить форму"
+        $("#clearButton").click(function () {
+          $("#registrationForm")[0].reset();
+          $("#errorMessage").hide(); // Скрываем сообщение об ошибке
         });
       });
     </script>
