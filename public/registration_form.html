@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма регистрации кастомера</title>
+    <style>
+      body {
+        background-color: #6a0dad; /* Фиолетовый фон */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        background-color: #fff;
+        max-width: 400px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      .container h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      .form-group input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .btn-primary {
+        background-color: #6a0dad;
+        border: none;
+        padding: 10px 20px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .btn-primary:hover {
+        background-color: #5a0cbe;
+      }
+      .alert {
+        display: none;
+        margin-top: 20px;
+      }
+      .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Регистрация кастомера</h1>
+      <form id="registrationForm">
+        <div class="form-group">
+          <label for="name">Имя:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="surname">Фамилия:</label>
+          <input type="text" id="surname" name="surname" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Телефон:</label>
+          <input type="text" id="phone" name="phone" required />
+        </div>
+        <div class="alert alert-danger" id="errorMessage">
+          Это поле уже существует в базе данных.
+        </div>
+        <button type="submit" class="btn-primary" id="registerButton">
+          Зарегистрироваться
+        </button>
+      </form>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#registrationForm").submit(function (event) {
+          event.preventDefault();
+          let customerData = {
+            name: $("#name").val(),
+            surname: $("#surname").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+          };
+          console.log("Данные формы:", customerData);
+          // Проверяем уникальность данных
+          $.ajax({
+            type: "POST",
+            url: "/check_unique",
+            data: JSON.stringify(customerData),
+            contentType: "application/json",
+            success: function (response) {
+              if (response.exists) {
+                $("#errorMessage").show();
+              } else {
+                $("#errorMessage").hide();
+                $.ajax({
+                  type: "POST",
+                  url: "/register",
+                  data: JSON.stringify(customerData),
+                  contentType: "application/json",
+                  success: function (response) {
+                    console.log("Ответ сервера:", response);
+                    window.location.href =
+                      "customer_card.html?id=" + response.id;
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(
+                      "Ошибка при регистрации:",
+                      textStatus,
+                      errorThrown
+                    );
+                    console.error("Ответ сервера:", jqXHR.responseText);
+                  },
+                });
+              }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(
+                "Ошибка при проверке уникальности:",
+                textStatus,
+                errorThrown
+              );
+              console.error("Ответ сервера:", jqXHR.responseText);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

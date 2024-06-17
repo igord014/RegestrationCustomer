@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таблица кастомеров</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        background-color: #fff;
+        width: 100%;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin: 20px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 {
+        margin: 0;
+      }
+      .btn-primary {
+        background-color: #6a0dad;
+        border: none;
+        padding: 10px 20px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        background-color: #5a0cbe;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #6a0dad;
+        color: #fff;
+      }
+      tr {
+        background-color: #fff;
+      }
+      tr:hover {
+        background-color: #ddd;
+      }
+      .clickable {
+        cursor: pointer;
+        color: blue;
+      }
+      .btn-delete {
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .btn-delete:hover {
+        background-color: #c9302c;
+      }
+    </style>
+    <!-- Подключаем jQuery для работы с JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Таблица кастомеров</h1>
+        <button id="addCustomerButton" class="btn-primary">
+          Добавить кастомера
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Действие</th>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Email</th>
+            <th>Телефон</th>
+          </tr>
+        </thead>
+        <tbody id="customerTableBody">
+          <!-- Данные кастомеров будут добавлены здесь -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Обработчик события нажатия на кнопку "Добавить кастомера"
+        $("#addCustomerButton").click(function () {
+          window.location.href = "registration_form.html";
+        });
+
+        // Запрашиваем данные всех кастомеров с сервера
+        $.get("/customers", function (data) {
+          // Проходим по каждому кастомеру и добавляем строку в таблицу
+          data.forEach(function (customer) {
+            $("#customerTableBody").append(
+              `<tr id="customer-${customer.id}">
+                            <td><button class="btn-delete" data-id="${customer.id}">Удалить</button></td>
+                            <td class="clickable" data-id="${customer.id}">${customer.id}</td>
+                            <td>${customer.name}</td>
+                            <td>${customer.surname}</td>
+                            <td>${customer.email}</td>
+                            <td>${customer.phone}</td>
+                        </tr>`
+            );
+          });
+
+          // Добавляем обработчик клика для ID
+          $(".clickable").click(function () {
+            let customerId = $(this).data("id");
+            window.location.href = "customer_card.html?id=" + customerId;
+          });
+
+          // Добавляем обработчик клика для кнопок удаления
+          $(".btn-delete").click(function () {
+            let customerId = $(this).data("id");
+            if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
+              $.ajax({
+                type: "POST",
+                url: "/delete_customer",
+                data: JSON.stringify({ id: customerId }),
+                contentType: "application/json",
+                success: function (response) {
+                  $(`#customer-${customerId}`).remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.error(
+                    "Ошибка при удалении кастомера:",
+                    textStatus,
+                    errorThrown
+                  );
+                },
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
