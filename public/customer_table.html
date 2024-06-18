@@ -10,9 +10,9 @@
         background-color: #f0f0f0;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: start;
         height: 100vh;
-        margin: 0;
+        padding: 10px;
       }
       .container {
         background-color: #fff;
@@ -142,6 +142,7 @@
                   data: JSON.stringify({ id: customer.id }),
                   contentType: "application/json",
                   success: function (response) {
+                    showTemporaryAlert(response.message, 6000); // Показать сообщение на 3 секунды
                     row.remove();
                   },
                   error: function (jqXHR, textStatus, errorThrown) {
@@ -154,6 +155,26 @@
                 });
               }
             });
+            // Функция для временного уведомления
+            function showTemporaryAlert(message, duration) {
+              var alertBox = document.createElement("div");
+              alertBox.style.position = "fixed";
+              alertBox.style.top = "10px";
+              alertBox.style.right = "10px";
+              alertBox.style.transform = "translateX(-50%)";
+              alertBox.style.backgroundColor = "green";
+              alertBox.style.color = "wight";
+              alertBox.style.padding = "10px 20px";
+              alertBox.style.borderRadius = "5px";
+              alertBox.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+              alertBox.style.zIndex = "1000";
+              alertBox.innerText = message;
+              document.body.appendChild(alertBox);
+
+              setTimeout(function () {
+                document.body.removeChild(alertBox);
+              }, duration);
+            }
             row.append($("<td></td>").append(deleteButton));
             tableBody.append(row);
           });
