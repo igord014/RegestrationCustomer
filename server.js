@@ -123,12 +123,10 @@ app.post("/update_customer", (req, res) => {
       if (err) {
         console.error("Ошибка при обновлении данных:", err.message);
         logToFile("POST", "/update_customer", { error: err.message });
-        return res
-          .status(500)
-          .json({
-            error: "Ошибка при обновлении данных",
-            details: err.message,
-          });
+        return res.status(500).json({
+          error: "Ошибка при обновлении данных",
+          details: err.message,
+        });
       }
       console.log("Кастомер успешно обновлен с ID:", id);
       logToFile("POST", "/update_customer", req.body);
@@ -180,12 +178,10 @@ app.get("/customers", (req, res) => {
     if (err) {
       console.error("Ошибка при извлечении всех данных:", err.message);
       logToFile("GET", "/customers", { error: err.message });
-      return res
-        .status(500)
-        .json({
-          error: "Ошибка при извлечении всех данных",
-          details: err.message,
-        });
+      return res.status(500).json({
+        error: "Ошибка при извлечении всех данных",
+        details: err.message,
+      });
     }
     console.log("Все клиенты:", rows);
     logToFile("GET", "/customers", rows);
@@ -205,12 +201,10 @@ app.post("/check_unique", (req, res) => {
       if (err) {
         console.error("Ошибка при проверке уникальности:", err.message);
         logToFile("POST", "/check_unique", { error: err.message });
-        return res
-          .status(500)
-          .json({
-            error: "Ошибка при проверке уникальности",
-            details: err.message,
-          });
+        return res.status(500).json({
+          error: "Ошибка при проверке уникальности",
+          details: err.message,
+        });
       }
       if (row) {
         console.log("Найдены дублирующиеся данные:", row);
@@ -247,6 +241,28 @@ app.delete("/logs", (req, res) => {
         .json({ error: "Ошибка при очистке логов", details: err.message });
     }
     res.send({ message: "Логи успешно очищены" });
+  });
+});
+
+app.delete("/delete_customers", (req, res) => {
+  // Новый маршрут для удаления нескольких кастомеров
+  let { ids } = req.body;
+  console.log("Получен запрос на удаление клиентов с ID:", ids);
+
+  let placeholders = ids.map(() => "?").join(",");
+  let sql = `DELETE FROM customer WHERE id IN (${placeholders})`;
+
+  db.run(sql, ids, function (err) {
+    if (err) {
+      console.error("Ошибка при удалении данных:", err.message);
+      logToFile("DELETE", "/delete_customers", { error: err.message });
+      return res
+        .status(500)
+        .json({ error: "Ошибка при удалении данных", details: err.message });
+    }
+    console.log("Кастомеры успешно удалены с ID:", ids);
+    logToFile("DELETE", "/delete_customers", req.body);
+    res.send({ message: "Customers deleted successfully" });
   });
 });
 

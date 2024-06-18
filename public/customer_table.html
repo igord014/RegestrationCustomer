@@ -20,7 +20,10 @@
         border-radius: 10px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         width: 80%;
-      }
+        max-width: 100%; /* Устанавливаем максимальную ширину */
+        overflow: auto; /* Добавлено для прокрутки */
+    }
+    
       table {
         width: 100%;
         border-collapse: collapse;
@@ -39,7 +42,8 @@
         background-color: #f1f1f1;
       }
       .btn-primary,
-      .btn-logs {
+      .btn-logs,
+      .btn-delete-all {
         background-color: #6a0dad;
         border: none;
         padding: 10px 20px;
@@ -47,9 +51,11 @@
         border-radius: 5px;
         cursor: pointer;
         margin-bottom: 20px;
+        margin-right: 10px; /* Добавлено для отступа между кнопками */
       }
       .btn-primary:hover,
-      .btn-logs:hover {
+      .btn-logs:hover,
+      .btn-delete-all:hover {
         background-color: #5a0cbe;
       }
       .btn-delete {
@@ -78,22 +84,31 @@
       >
         Добавить кастомера
       </button>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Email</th>
-            <th>Телефон</th>
-            <th>Дата регистрации</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody id="customerTableBody">
-          <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
-        </tbody>
-      </table>
+      <button class="btn-delete-all" id="deleteSelected">
+        Удалить выбранные
+      </button>
+      
+      <div style="overflow-x: auto">
+        <!-- Обернули таблицу в блок с прокруткой -->
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAll" /></th>
+              <!-- Добавлен чекбокс для выбора всех -->
+              <th>ID</th>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Email</th>
+              <th>Телефон</th>
+              <th>Дата регистрации</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="customerTableBody">
+            <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <script>
@@ -103,6 +118,13 @@
           let tableBody = $("#customerTableBody");
           data.forEach(function (customer) {
             let row = $("<tr></tr>");
+            row.append(
+              $("<td></td>").append(
+                $('<input type="checkbox" class="selectCustomer">').val(
+                  customer.id
+                )
+              )
+            );
             row.append(
               $("<td></td>")
                 .text(customer.id)
@@ -132,10 +154,9 @@
             } else {
               row.append($("<td></td>").text("Invalid Date"));
             }
-            
+
             let deleteButton = $(
               '<button class="btn-delete">Удалить</button>'
-
             ).click(function () {
               if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
                 $.ajax({
@@ -188,6 +209,42 @@
             errorThrown
           );
         });
+      });
+
+      // Обработчик для выбора всех чекбоксов
+      $("#selectAll").click(function () {
+        $(".selectCustomer").prop("checked", this.checked);
+      });
+
+      // Обработчик для кнопки "Удалить выбранные"
+      $("#deleteSelected").click(function () {
+        let selectedIds = [];
+        $(".selectCustomer:checked").each(function () {
+          selectedIds.push($(this).val());
+        });
+
+        if (
+          selectedIds.length > 0 &&
+          confirm("Вы уверены, что хотите удалить выбранных кастомеров?")
+        ) {
+          $.ajax({
+            type: "DELETE",
+            url: "/delete_customers",
+            data: JSON.stringify({ ids: selectedIds }),
+            contentType: "application/json",
+            success: function (response) {
+              // Удаляем строки из таблицы
+              $(".selectCustomer:checked").closest("tr").remove();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(
+                "Ошибка при удалении выбранных кастомеров:",
+                textStatus,
+                errorThrown
+              );
+            },
+          });
+        }
       });
     </script>
   </body>
