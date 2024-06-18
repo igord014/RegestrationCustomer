@@ -137,7 +137,7 @@
             ).click(function () {
               if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
                 $.ajax({
-                  type: "POST",
+                  type: "DELETE", // Изменено с POST на DELETE
                   url: "/delete_customer",
                   data: JSON.stringify({ id: customer.id }),
                   contentType: "application/json",
