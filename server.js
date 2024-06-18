@@ -22,6 +22,7 @@ db.serialize(() => {
         registration_date TEXT
     )`);
 
+  // Проверка и добавление столбца registration_date, если его нет
   db.all("PRAGMA table_info(customer);", (err, columns) => {
     if (err) {
       console.error("Ошибка при получении информации о таблице:", err.message);
@@ -185,6 +186,7 @@ app.get("/customers", (req, res) => {
   });
 });
 
+// Маршрут для проверки уникальности данных
 app.post("/check_unique", (req, res) => {
   let { email, phone } = req.body;
   console.log("Получен запрос на проверку уникальности:", { email, phone });
@@ -211,6 +213,7 @@ app.post("/check_unique", (req, res) => {
   );
 });
 
+// Маршрут для получения логов
 app.get("/logs", (req, res) => {
   fs.readFile("logs.json", (err, data) => {
     if (err) {
@@ -223,6 +226,7 @@ app.get("/logs", (req, res) => {
   });
 });
 
+// Маршрут для очистки логов
 app.delete("/logs", (req, res) => {
   fs.writeFile("logs.json", JSON.stringify([], null, 2), (err) => {
     if (err) {
@@ -253,6 +257,23 @@ app.delete("/delete_customers", (req, res) => {
     console.log("Кастомеры успешно удалены с ID:", ids);
     logToFile("DELETE", "/delete_customers", req.body);
     res.send({ message: "Customers deleted successfully" });
+  });
+});
+
+// Маршрут для обновления даты регистрации кастомера
+app.put("/update_customer_date", (req, res) => {
+  let { id, registration_date } = req.body;
+  console.log("Получены данные для обновления даты регистрации:", { id, registration_date });
+
+  db.run(`UPDATE customer SET registration_date = ? WHERE id = ?`, [registration_date, id], function (err) {
+    if (err) {
+      console.error("Ошибка при обновлении даты регистрации:", err.message);
+      logToFile("PUT", "/update_customer_date", { error: err.message });
+      return res.status(500).json({ error: "Ошибка при обновлении даты регистрации", details: err.message });
+    }
+    console.log("Дата регистрации успешно обновлена для кастомера с ID:", id);
+    logToFile("PUT", "/update_customer_date", req.body);
+    res.send({ message: "Дата регистрации успешно обновлена" });
   });
 });
 

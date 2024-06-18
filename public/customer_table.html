@@ -28,7 +28,7 @@
         position: absolute;
         top: 10px;
         right: 30px;
-        display: flex;
+       
         align-items: center;
       }
       .search-container input {
@@ -84,7 +84,8 @@
       .btn-delete-all:hover {
         background-color: #5a0cbe;
       }
-      .btn-delete {
+      .btn-delete,
+      .btn-edit {
         background-color: #ff6347;
         border: none;
         padding: 5px 10px;
@@ -92,7 +93,8 @@
         border-radius: 5px;
         cursor: pointer;
       }
-      .btn-delete:hover {
+      .btn-delete:hover,
+      .btn-edit:hover {
         background-color: #ff4500;
       }
     </style>
@@ -138,7 +140,15 @@
               <th>Фамилия</th>
               <th>Email</th>
               <th>Телефон</th>
-              <th>Дата регистрации</th>
+              <th id="sortDate">
+                Дата регистрации
+                <div class="sort-arrows">
+                  <span id="sortDateAsc">&#9650;</span>
+                  <!-- Стрелка вверх -->
+                  <span id="sortDateDesc">&#9660;</span>
+                  <!-- Стрелка вниз -->
+                </div>
+              </th>
               <th>Действия</th>
             </tr>
           </thead>
@@ -152,6 +162,7 @@
     <script>
       $(document).ready(function () {
         let sortOrder = "asc"; // Порядок сортировки: 'asc' или 'desc'
+        let sortColumn = "id"; // Колонка для сортировки
 
         function loadCustomers() {
           $.get("/customers", function (data) {
@@ -192,20 +203,53 @@
             let registrationDate = new Date(customer.registration_date);
             if (!isNaN(registrationDate.getTime())) {
               row.append(
-                $("<td></td>").text(
-                  registrationDate.toLocaleString("ru-RU", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                  })
-                )
+                $("<td></td>")
+                  .attr("data-date", registrationDate.toISOString())
+                  .text(
+                    registrationDate.toLocaleString("ru-RU", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })
+                  )
               );
             } else {
               row.append($("<td></td>").text("Invalid Date"));
             }
+
+            let editButton = $(
+              '<button class="btn-edit">Редактировать</button>'
+            ).click(function () {
+              let newDate = prompt(
+                "Введите новую дату в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС",
+                registrationDate.toISOString().slice(0, 19).replace("T", " ")
+              );
+              if (newDate) {
+                $.ajax({
+                  type: "PUT",
+                  url: "/update_customer_date",
+                  data: JSON.stringify({
+                    id: customer.id,
+                    registration_date: newDate,
+                  }),
+                  contentType: "application/json",
+                  success: function (response) {
+                    showAlert(response.message, 6000);
+                    loadCustomers();
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(
+                      "Ошибка при обновлении даты регистрации:",
+                      textStatus,
+                      errorThrown
+                    );
+                  },
+                });
+              }
+            });
 
             let deleteButton = $(
               '<button class="btn-delete">Удалить</button>'
@@ -231,7 +275,7 @@
               }
             });
 
-            row.append($("<td></td>").append(deleteButton));
+            row.append($("<td></td>").append(editButton).append(deleteButton));
             tableBody.append(row);
           });
         }
@@ -327,11 +371,26 @@
         // Обработчик для сортировки по ID
         $("#sortAsc").click(function () {
           sortOrder = "asc";
+          sortColumn = "id";
           sortTable();
         });
 
         $("#sortDesc").click(function () {
           sortOrder = "desc";
+          sortColumn = "id";
+          sortTable();
+        });
+
+        // Обработчик для сортировки по дате
+        $("#sortDateAsc").click(function () {
+          sortOrder = "asc";
+          sortColumn = "date";
+          sortTable();
+        });
+
+        $("#sortDateDesc").click(function () {
+          sortOrder = "desc";
+          sortColumn = "date";
           sortTable();
         });
 
@@ -339,12 +398,18 @@
           let tableBody = $("#customerTableBody");
           let rows = tableBody.find("tr").toArray();
           rows.sort(function (a, b) {
-            let aId = parseInt($(a).find("td:nth-child(2)").text());
-            let bId = parseInt($(b).find("td:nth-child(2)").text());
-            if (sortOrder === "asc") {
-              return aId - bId;
-            } else {
-              return bId - aId;
+            if (sortColumn === "id") {
+              let aId = parseInt($(a).find("td:nth-child(2)").text());
+              let bId = parseInt($(b).find("td:nth-child(2)").text());
+              return sortOrder === "asc" ? aId - bId : bId - aId;
+            } else if (sortColumn === "date") {
+              let aDate = new Date(
+                $(a).find("td:nth-child(7)").attr("data-date")
+              );
+              let bDate = new Date(
+                $(b).find("td:nth-child(7)").attr("data-date")
+              );
+              return sortOrder === "asc" ? aDate - bDate : bDate - aDate;
             }
           });
           tableBody.empty().append(rows);
