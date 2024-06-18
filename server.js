@@ -21,6 +21,24 @@ db.serialize(() => {
         phone TEXT,
         registration_date TEXT
     )`);
+
+    // Добавить столбец, если он еще не существует
+    db.all("PRAGMA table_info(customer);", (err, columns) => {
+        if (err) {
+            console.error('Ошибка при получении информации о таблице:', err.message);
+        } else {
+            const columnNames = columns.map(col => col.name);
+            if (!columnNames.includes('registration_date')) {
+                db.run(`ALTER TABLE customer ADD COLUMN registration_date TEXT`, (err) => {
+                    if (err) {
+                        console.error('Ошибка при добавлении столбца registration_date:', err.message);
+                    } else {
+                        console.log('Столбец registration_date успешно добавлен');
+                    }
+                });
+            }
+        }
+    });
 });
 
 function logToFile(method, url, body) {
@@ -122,6 +140,26 @@ app.get('/customers', (req, res) => {
         console.log('Все клиенты:', rows);
         logToFile('GET', '/customers', rows);
         res.json(rows);
+    });
+});
+
+// Маршрут для проверки уникальности данных
+app.post('/check_unique', (req, res) => {
+    let { email, phone } = req.body;
+    console.log('Получен запрос на проверку уникальности:', { email, phone });
+
+    db.get(`SELECT * FROM customer WHERE email = ? OR phone = ?`, [email, phone], (err, row) => {
+        if (err) {
+            console.error('Ошибка при проверке уникальности:', err.message);
+            logToFile('POST', '/check_unique', { error: err.message });
+            return res.status(500).json({ error: 'Ошибка при проверке уникальности', details: err.message });
+        }
+        if (row) {
+            console.log('Найдены дублирующиеся данные:', row);
+            res.json({ exists: true });
+        } else {
+            res.json({ exists: false });
+        }
     });
 });
 

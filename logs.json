@@ -97,5 +97,510 @@
         "surname": "soldout"
       }
     ]
+  },
+  {
+    "id": 1718679597673,
+    "timestamp": "2024-06-18T02:59:57.673Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718681878312,
+    "timestamp": "2024-06-18T03:37:58.312Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718681880654,
+    "timestamp": "2024-06-18T03:38:00.654Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718681888996,
+    "timestamp": "2024-06-18T03:38:08.996Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718681893315,
+    "timestamp": "2024-06-18T03:38:13.315Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718682351286,
+    "timestamp": "2024-06-18T03:45:51.286Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718682664386,
+    "timestamp": "2024-06-18T03:51:04.386Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 16,
+        "name": "igors",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dor"
+      },
+      {
+        "id": 17,
+        "name": "Man",
+        "email": "man@gmail.com",
+        "phone": "0502350066",
+        "surname": "Bill"
+      },
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718682669119,
+    "timestamp": "2024-06-18T03:51:09.119Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 16
+    }
+  },
+  {
+    "id": 1718682673103,
+    "timestamp": "2024-06-18T03:51:13.103Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 17
+    }
+  },
+  {
+    "id": 1718682689948,
+    "timestamp": "2024-06-18T03:51:29.948Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "error": "SQLITE_ERROR: table customer has no column named registration_date"
+    }
+  },
+  {
+    "id": 1718682756373,
+    "timestamp": "2024-06-18T03:52:36.373Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "error": "SQLITE_ERROR: table customer has no column named registration_date"
+    }
+  },
+  {
+    "id": 1718682953219,
+    "timestamp": "2024-06-18T03:55:53.219Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill"
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre"
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout"
+      }
+    ]
+  },
+  {
+    "id": 1718682964054,
+    "timestamp": "2024-06-18T03:56:04.054Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "error": "SQLITE_ERROR: table customer has no column named registration_date"
+    }
+  },
+  {
+    "id": 1718683263333,
+    "timestamp": "2024-06-18T04:01:03.333Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 18,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": null
+      },
+      {
+        "id": 19,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": null
+      },
+      {
+        "id": 20,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout",
+        "registration_date": null
+      }
+    ]
+  },
+  {
+    "id": 1718683266879,
+    "timestamp": "2024-06-18T04:01:06.879Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 18
+    }
+  },
+  {
+    "id": 1718683269536,
+    "timestamp": "2024-06-18T04:01:09.536Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 19
+    }
+  },
+  {
+    "id": 1718683273131,
+    "timestamp": "2024-06-18T04:01:13.131Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 20
+    }
+  },
+  {
+    "id": 1718683285545,
+    "timestamp": "2024-06-18T04:01:25.545Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "name": "Igor",
+      "surname": "Dobkin",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022"
+    }
+  },
+  {
+    "id": 1718683285685,
+    "timestamp": "2024-06-18T04:01:25.685Z",
+    "method": "GET",
+    "url": "/customer/21",
+    "body": {
+      "id": 21,
+      "name": "Igor",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022",
+      "surname": "Dobkin",
+      "registration_date": "2024-06-18T04:01:25.533Z"
+    }
+  },
+  {
+    "id": 1718683305931,
+    "timestamp": "2024-06-18T04:01:45.931Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "21",
+      "name": "Igor",
+      "surname": "Dobkin",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022"
+    }
+  },
+  {
+    "id": 1718683308861,
+    "timestamp": "2024-06-18T04:01:48.861Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      }
+    ]
+  },
+  {
+    "id": 1718683474495,
+    "timestamp": "2024-06-18T04:04:34.495Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      }
+    ]
   }
 ]
