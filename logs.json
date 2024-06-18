@@ -602,5 +602,109 @@
         "registration_date": "2024-06-18T04:01:25.533Z"
       }
     ]
+  },
+  {
+    "id": 1718684222363,
+    "timestamp": "2024-06-18T04:17:02.363Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      }
+    ]
+  },
+  {
+    "id": 1718684231228,
+    "timestamp": "2024-06-18T04:17:11.228Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "name": "qwe",
+      "surname": "tre",
+      "email": "igordobkin222@gmail.com",
+      "phone": "972569873366"
+    }
+  },
+  {
+    "id": 1718684231367,
+    "timestamp": "2024-06-18T04:17:11.367Z",
+    "method": "GET",
+    "url": "/customer/22",
+    "body": {
+      "id": 22,
+      "name": "qwe",
+      "email": "igordobkin222@gmail.com",
+      "phone": "972569873366",
+      "surname": "tre",
+      "registration_date": "2024-06-18T04:17:11.215Z"
+    }
+  },
+  {
+    "id": 1718684233521,
+    "timestamp": "2024-06-18T04:17:13.521Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "22",
+      "name": "qwe",
+      "surname": "tre",
+      "email": "igordobkin222@gmail.com",
+      "phone": "972569873366"
+    }
+  },
+  {
+    "id": 1718684235043,
+    "timestamp": "2024-06-18T04:17:15.043Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      },
+      {
+        "id": 22,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-18T04:17:11.215Z"
+      }
+    ]
+  },
+  {
+    "id": 1718684241268,
+    "timestamp": "2024-06-18T04:17:21.268Z",
+    "method": "POST",
+    "url": "/delete_customer",
+    "body": {
+      "id": 22
+    }
+  },
+  {
+    "id": 1718684249045,
+    "timestamp": "2024-06-18T04:17:29.045Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      }
+    ]
   }
 ]
