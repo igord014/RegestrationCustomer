@@ -48,9 +48,24 @@
         background-color: #6a0dad;
         color: white;
         cursor: pointer; /* Добавлено для указателя курсора на заголовке */
+        position: relative; /* Для позиционирования стрелок */
       }
       tr:hover {
         background-color: #f1f1f1;
+      }
+      .sort-arrows {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .sort-arrows span {
+        display: block;
+        font-size: 10px;
+        line-height: 10px;
+        cursor: pointer;
       }
       .btn-primary,
       .btn-logs,
@@ -89,12 +104,17 @@
       <div class="search-container">
         <input type="text" id="searchId" placeholder="Поиск по ID" />
         <button class="btn-primary" id="searchButton">Поиск</button>
-        <button class="btn-primary" id="clearSearchButton">Очистить поиск</button>
+        <button class="btn-primary" id="clearSearchButton">
+          Очистить поиск
+        </button>
       </div>
       <button class="btn-logs" onclick="window.location.href='logs.html'">
         Просмотреть логи
       </button>
-      <button class="btn-primary" onclick="window.location.href='registration_form.html'">
+      <button
+        class="btn-primary"
+        onclick="window.location.href='registration_form.html'"
+      >
         Добавить кастомера
       </button>
       <button class="btn-delete-all" id="deleteSelected">
@@ -105,7 +125,15 @@
           <thead>
             <tr>
               <th><input type="checkbox" id="selectAll" /></th>
-              <th id="sortId">ID</th>
+              <th id="sortId">
+                ID
+                <div class="sort-arrows">
+                  <span id="sortAsc">&#9650;</span>
+                  <!-- Стрелка вверх -->
+                  <span id="sortDesc">&#9660;</span>
+                  <!-- Стрелка вниз -->
+                </div>
+              </th>
               <th>Имя</th>
               <th>Фамилия</th>
               <th>Email</th>
@@ -123,7 +151,7 @@
 
     <script>
       $(document).ready(function () {
-        let sortOrder = 'asc'; // Порядок сортировки: 'asc' или 'desc'
+        let sortOrder = "asc"; // Порядок сортировки: 'asc' или 'desc'
 
         function loadCustomers() {
           $.get("/customers", function (data) {
@@ -144,7 +172,9 @@
             let row = $("<tr></tr>");
             row.append(
               $("<td></td>").append(
-                $('<input type="checkbox" class="selectCustomer">').val(customer.id)
+                $('<input type="checkbox" class="selectCustomer">').val(
+                  customer.id
+                )
               )
             );
             row.append(
@@ -220,7 +250,10 @@
             selectedIds.push($(this).val());
           });
 
-          if (selectedIds.length > 0 && confirm("Вы уверены, что хотите удалить выбранных кастомеров?")) {
+          if (
+            selectedIds.length > 0 &&
+            confirm("Вы уверены, что хотите удалить выбранных кастомеров?")
+          ) {
             $.ajax({
               type: "DELETE",
               url: "/delete_customers",
@@ -292,7 +325,17 @@
         }
 
         // Обработчик для сортировки по ID
-        $("#sortId").click(function () {
+        $("#sortAsc").click(function () {
+          sortOrder = "asc";
+          sortTable();
+        });
+
+        $("#sortDesc").click(function () {
+          sortOrder = "desc";
+          sortTable();
+        });
+
+        function sortTable() {
           let tableBody = $("#customerTableBody");
           let rows = tableBody.find("tr").toArray();
           rows.sort(function (a, b) {
@@ -305,34 +348,40 @@
             }
           });
           tableBody.empty().append(rows);
-          sortOrder = sortOrder === "asc" ? "desc" : "asc";
 
           // Перепривязка событий удаления после сортировки
           rows.forEach(function (row) {
-            $(row).find('.btn-delete').click(function () {
-              let customerId = $(this).closest('tr').find('td:nth-child(2)').text();
-              if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
-                $.ajax({
-                  type: "DELETE",
-                  url: "/delete_customer",
-                  data: JSON.stringify({ id: customerId }),
-                  contentType: "application/json",
-                  success: function (response) {
-                    showAlert(response.message, 6000); // Показать сообщение на 3 секунды
-                    $(row).remove();
-                  },
-                  error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(
-                      "Ошибка при удалении кастомера:",
-                      textStatus,
-                      errorThrown
-                    );
-                  },
-                });
-              }
-            });
+            $(row)
+              .find(".btn-delete")
+              .click(function () {
+                let customerId = $(this)
+                  .closest("tr")
+                  .find("td:nth-child(2)")
+                  .text();
+                if (
+                  confirm("Вы уверены, что хотите удалить этого кастомера?")
+                ) {
+                  $.ajax({
+                    type: "DELETE",
+                    url: "/delete_customer",
+                    data: JSON.stringify({ id: customerId }),
+                    contentType: "application/json",
+                    success: function (response) {
+                      showAlert(response.message, 6000); // Показать сообщение на 3 секунды
+                      $(row).remove();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                      console.error(
+                        "Ошибка при удалении кастомера:",
+                        textStatus,
+                        errorThrown
+                      );
+                    },
+                  });
+                }
+              });
           });
-        });
+        }
       });
     </script>
   </body>

@@ -1,382 +1,10 @@
 [
   {
-    "id": 1718725136895,
-    "timestamp": "2024-06-18T15:38:56.895Z",
+    "id": 1718725910851,
+    "timestamp": "2024-06-18T15:51:50.851Z",
     "method": "GET",
     "url": "/customers",
     "body": [
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      },
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725146367,
-    "timestamp": "2024-06-18T15:39:06.367Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      },
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725155636,
-    "timestamp": "2024-06-18T15:39:15.636Z",
-    "method": "GET",
-    "url": "/customer/50",
-    "body": {
-      "id": 50,
-      "name": "jon",
-      "email": "jon@gmail.com",
-      "phone": "0503332211",
-      "surname": "bill",
-      "registration_date": "2024-06-18T15:38:38.980Z"
-    }
-  },
-  {
-    "id": 1718725167583,
-    "timestamp": "2024-06-18T15:39:27.583Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      },
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725177525,
-    "timestamp": "2024-06-18T15:39:37.525Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      },
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725184294,
-    "timestamp": "2024-06-18T15:39:44.294Z",
-    "method": "DELETE",
-    "url": "/delete_customer",
-    "body": {
-      "id": 49
-    }
-  },
-  {
-    "id": 1718725202104,
-    "timestamp": "2024-06-18T15:40:02.104Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "qwe",
-      "surname": "tre",
-      "email": "igordobkin222@gmail.com",
-      "phone": "972569873366"
-    }
-  },
-  {
-    "id": 1718725202240,
-    "timestamp": "2024-06-18T15:40:02.240Z",
-    "method": "GET",
-    "url": "/customer/51",
-    "body": {
-      "id": 51,
-      "name": "qwe",
-      "email": "igordobkin222@gmail.com",
-      "phone": "972569873366",
-      "surname": "tre",
-      "registration_date": "2024-06-18T15:40:02.092Z"
-    }
-  },
-  {
-    "id": 1718725203525,
-    "timestamp": "2024-06-18T15:40:03.525Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "51",
-      "name": "qwe",
-      "surname": "tre",
-      "email": "igordobkin222@gmail.com",
-      "phone": "972569873366"
-    }
-  },
-  {
-    "id": 1718725207664,
-    "timestamp": "2024-06-18T15:40:07.664Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      },
-      {
-        "id": 51,
-        "name": "qwe",
-        "email": "igordobkin222@gmail.com",
-        "phone": "972569873366",
-        "surname": "tre",
-        "registration_date": "2024-06-18T15:40:02.092Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725216729,
-    "timestamp": "2024-06-18T15:40:16.729Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "Igor014",
-      "surname": "Dobkin",
-      "email": "igord014@gmail.com",
-      "phone": "0503610022"
-    }
-  },
-  {
-    "id": 1718725216855,
-    "timestamp": "2024-06-18T15:40:16.855Z",
-    "method": "GET",
-    "url": "/customer/52",
-    "body": {
-      "id": 52,
-      "name": "Igor014",
-      "email": "igord014@gmail.com",
-      "phone": "0503610022",
-      "surname": "Dobkin",
-      "registration_date": "2024-06-18T15:40:16.715Z"
-    }
-  },
-  {
-    "id": 1718725218813,
-    "timestamp": "2024-06-18T15:40:18.813Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "52",
-      "name": "Igor014",
-      "surname": "Dobkin",
-      "email": "igord014@gmail.com",
-      "phone": "0503610022"
-    }
-  },
-  {
-    "id": 1718725223004,
-    "timestamp": "2024-06-18T15:40:23.004Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      },
-      {
-        "id": 51,
-        "name": "qwe",
-        "email": "igordobkin222@gmail.com",
-        "phone": "972569873366",
-        "surname": "tre",
-        "registration_date": "2024-06-18T15:40:02.092Z"
-      },
-      {
-        "id": 52,
-        "name": "Igor014",
-        "email": "igord014@gmail.com",
-        "phone": "0503610022",
-        "surname": "Dobkin",
-        "registration_date": "2024-06-18T15:40:16.715Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725224397,
-    "timestamp": "2024-06-18T15:40:24.397Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      },
-      {
-        "id": 51,
-        "name": "qwe",
-        "email": "igordobkin222@gmail.com",
-        "phone": "972569873366",
-        "surname": "tre",
-        "registration_date": "2024-06-18T15:40:02.092Z"
-      },
-      {
-        "id": 52,
-        "name": "Igor014",
-        "email": "igord014@gmail.com",
-        "phone": "0503610022",
-        "surname": "Dobkin",
-        "registration_date": "2024-06-18T15:40:16.715Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725255461,
-    "timestamp": "2024-06-18T15:40:55.461Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      },
-      {
-        "id": 51,
-        "name": "qwe",
-        "email": "igordobkin222@gmail.com",
-        "phone": "972569873366",
-        "surname": "tre",
-        "registration_date": "2024-06-18T15:40:02.092Z"
-      },
-      {
-        "id": 52,
-        "name": "Igor014",
-        "email": "igord014@gmail.com",
-        "phone": "0503610022",
-        "surname": "Dobkin",
-        "registration_date": "2024-06-18T15:40:16.715Z"
-      }
-    ]
-  },
-  {
-    "id": 1718725267972,
-    "timestamp": "2024-06-18T15:41:07.972Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718725268110,
-    "timestamp": "2024-06-18T15:41:08.110Z",
-    "method": "GET",
-    "url": "/customer/53",
-    "body": {
-      "id": 53,
-      "name": "Marc",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847",
-      "surname": "DeMarco",
-      "registration_date": "2024-06-18T15:41:07.949Z"
-    }
-  },
-  {
-    "id": 1718725269506,
-    "timestamp": "2024-06-18T15:41:09.506Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "53",
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718725273637,
-    "timestamp": "2024-06-18T15:41:13.637Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 50,
-        "name": "jon",
-        "email": "jon@gmail.com",
-        "phone": "0503332211",
-        "surname": "bill",
-        "registration_date": "2024-06-18T15:38:38.980Z"
-      },
-      {
-        "id": 51,
-        "name": "qwe",
-        "email": "igordobkin222@gmail.com",
-        "phone": "972569873366",
-        "surname": "tre",
-        "registration_date": "2024-06-18T15:40:02.092Z"
-      },
       {
         "id": 52,
         "name": "Igor014",
@@ -386,24 +14,40 @@
         "registration_date": "2024-06-18T15:40:16.715Z"
       },
       {
-        "id": 53,
+        "id": 54,
+        "name": "igor",
+        "email": "igord@gmail.com",
+        "phone": "0503698855",
+        "surname": "dorov",
+        "registration_date": "2024-06-18T15:50:24.555Z"
+      },
+      {
+        "id": 55,
         "name": "Marc",
         "email": "Marc@gmail.com",
         "phone": "380963695847",
         "surname": "DeMarco",
-        "registration_date": "2024-06-18T15:41:07.949Z"
+        "registration_date": "2024-06-18T15:50:37.452Z"
+      },
+      {
+        "id": 56,
+        "name": "golden",
+        "email": "golden@gmail.com",
+        "phone": "0502361144",
+        "surname": "test",
+        "registration_date": "2024-06-18T15:50:53.461Z"
       }
     ]
   },
   {
-    "id": 1718725282462,
-    "timestamp": "2024-06-18T15:41:22.462Z",
+    "id": 1718725919561,
+    "timestamp": "2024-06-18T15:51:59.561Z",
     "method": "DELETE",
     "url": "/delete_customers",
     "body": {
       "ids": [
-        "50",
-        "51"
+        "52",
+        "55"
       ]
     }
   }
