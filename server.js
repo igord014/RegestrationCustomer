@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs");
 const path = require("path");
+const multer = require("multer"); // Добавлен для обработки загрузки файлов
+const xlsx = require("xlsx"); // Добавлен для работы с файлами Excel
 
 const app = express();
 const PORT = 3001;
@@ -104,31 +106,30 @@ app.post("/register", (req, res) => {
   );
 });
 
-app.post("/update_customer", (req, res) => {
-  let { id, name, surname, email, phone } = req.body;
-  console.log("Получены данные для обновления:", {
+app.put("/update_customer_date", (req, res) => {
+  let { id, registration_date } = req.body;
+  console.log("Получены данные для обновления даты регистрации:", {
     id,
-    name,
-    surname,
-    email,
-    phone,
+    registration_date,
   });
 
   db.run(
-    `UPDATE customer SET name = ?, surname = ?, email = ?, phone = ? WHERE id = ?`,
-    [name, surname, email, phone, id],
+    `UPDATE customer SET registration_date = ? WHERE id = ?`,
+    [registration_date, id],
     function (err) {
       if (err) {
-        console.error("Ошибка при обновлении данных:", err.message);
-        logToFile("POST", "/update_customer", { error: err.message });
-        return res.status(500).json({
-          error: "Ошибка при обновлении данных",
-          details: err.message,
-        });
+        console.error("Ошибка при обновлении даты регистрации:", err.message);
+        logToFile("PUT", "/update_customer_date", { error: err.message });
+        return res
+          .status(500)
+          .json({
+            error: "Ошибка при обновлении даты регистрации",
+            details: err.message,
+          });
       }
-      console.log("Кастомер успешно обновлен с ID:", id);
-      logToFile("POST", "/update_customer", req.body);
-      res.send({ message: "Customer updated successfully" });
+      console.log("Дата регистрации успешно обновлена для ID:", id);
+      logToFile("PUT", "/update_customer_date", req.body);
+      res.send({ message: "Registration date updated successfully" });
     }
   );
 });
@@ -175,10 +176,12 @@ app.get("/customers", (req, res) => {
     if (err) {
       console.error("Ошибка при извлечении всех данных:", err.message);
       logToFile("GET", "/customers", { error: err.message });
-      return res.status(500).json({
-        error: "Ошибка при извлечении всех данных",
-        details: err.message,
-      });
+      return res
+        .status(500)
+        .json({
+          error: "Ошибка при извлечении всех данных",
+          details: err.message,
+        });
     }
     console.log("Все клиенты:", rows);
     logToFile("GET", "/customers", rows);
@@ -198,10 +201,12 @@ app.post("/check_unique", (req, res) => {
       if (err) {
         console.error("Ошибка при проверке уникальности:", err.message);
         logToFile("POST", "/check_unique", { error: err.message });
-        return res.status(500).json({
-          error: "Ошибка при проверке уникальности",
-          details: err.message,
-        });
+        return res
+          .status(500)
+          .json({
+            error: "Ошибка при проверке уникальности",
+            details: err.message,
+          });
       }
       if (row) {
         console.log("Найдены дублирующиеся данные:", row);
@@ -260,20 +265,41 @@ app.delete("/delete_customers", (req, res) => {
   });
 });
 
-// Маршрут для обновления даты регистрации кастомера
-app.put("/update_customer_date", (req, res) => {
-  let { id, registration_date } = req.body;
-  console.log("Получены данные для обновления даты регистрации:", { id, registration_date });
+// Настройка multer для обработки загрузки файлов
+const upload = multer({ dest: "uploads/" });
 
-  db.run(`UPDATE customer SET registration_date = ? WHERE id = ?`, [registration_date, id], function (err) {
-    if (err) {
-      console.error("Ошибка при обновлении даты регистрации:", err.message);
-      logToFile("PUT", "/update_customer_date", { error: err.message });
-      return res.status(500).json({ error: "Ошибка при обновлении даты регистрации", details: err.message });
-    }
-    console.log("Дата регистрации успешно обновлена для кастомера с ID:", id);
-    logToFile("PUT", "/update_customer_date", req.body);
-    res.send({ message: "Дата регистрации успешно обновлена" });
+// Маршрут для загрузки файла Excel
+app.post("/upload_excel", upload.single("excelFile"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("Файл не загружен");
+  }
+
+  const workbook = xlsx.readFile(req.file.path);
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+  const data = xlsx.utils.sheet_to_json(sheet);
+
+  data.forEach((row) => {
+    const { name, surname, email, phone, registration_date } = row;
+    db.run(
+      `INSERT INTO customer (name, surname, email, phone, registration_date) VALUES (?, ?, ?, ?, ?)`,
+      [
+        name,
+        surname,
+        email,
+        phone,
+        registration_date || new Date().toISOString(),
+      ],
+      function (err) {
+        if (err) {
+          console.error("Ошибка при вставке данных:", err.message);
+        }
+      }
+    );
+  });
+
+  res.send({
+    message: "Файл успешно загружен и данные добавлены в базу данных",
   });
 });
 
