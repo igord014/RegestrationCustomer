@@ -26,7 +26,7 @@
       }
       .search-container {
         position: absolute;
-        top: 30px;
+        top: 10px;
         right: 30px;
         display: flex;
         align-items: center;
@@ -47,6 +47,7 @@
       th {
         background-color: #6a0dad;
         color: white;
+        cursor: pointer; /* Добавлено для указателя курсора на заголовке */
       }
       tr:hover {
         background-color: #f1f1f1;
@@ -56,7 +57,7 @@
       .btn-delete-all {
         background-color: #6a0dad;
         border: none;
-        padding: 10px 20px;
+        padding: 5px 5px;
         color: #fff;
         border-radius: 5px;
         cursor: pointer;
@@ -104,7 +105,7 @@
           <thead>
             <tr>
               <th><input type="checkbox" id="selectAll" /></th>
-              <th>ID</th>
+              <th id="sortId">ID</th>
               <th>Имя</th>
               <th>Фамилия</th>
               <th>Email</th>
@@ -122,82 +123,86 @@
 
     <script>
       $(document).ready(function () {
+        let sortOrder = 'asc'; // Порядок сортировки: 'asc' или 'desc'
+
         function loadCustomers() {
           $.get("/customers", function (data) {
-            let tableBody = $("#customerTableBody");
-            tableBody.empty();
-            data.forEach(function (customer) {
-              let row = $("<tr></tr>");
-              row.append(
-                $("<td></td>").append(
-                  $('<input type="checkbox" class="selectCustomer">').val(
-                    customer.id
-                  )
-                )
-              );
-              row.append(
-                $("<td></td>")
-                  .text(customer.id)
-                  .click(function () {
-                    window.location.href = "customer_card.html?id=" + customer.id;
-                  })
-                  .css("cursor", "pointer")
-              );
-              row.append($("<td></td>").text(customer.name));
-              row.append($("<td></td>").text(customer.surname));
-              row.append($("<td></td>").text(customer.email));
-              row.append($("<td></td>").text(customer.phone));
-              let registrationDate = new Date(customer.registration_date);
-              if (!isNaN(registrationDate.getTime())) {
-                row.append(
-                  $("<td></td>").text(
-                    registrationDate.toLocaleString("ru-RU", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                    })
-                  )
-                );
-              } else {
-                row.append($("<td></td>").text("Invalid Date"));
-              }
-
-              let deleteButton = $(
-                '<button class="btn-delete">Удалить</button>'
-              ).click(function () {
-                if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
-                  $.ajax({
-                    type: "DELETE",
-                    url: "/delete_customer",
-                    data: JSON.stringify({ id: customer.id }),
-                    contentType: "application/json",
-                    success: function (response) {
-                      showAlert(response.message, 6000); // Показать сообщение на 3 секунды
-                      row.remove();
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                      console.error(
-                        "Ошибка при удалении кастомера:",
-                        textStatus,
-                        errorThrown
-                      );
-                    },
-                  });
-                }
-              });
-
-              row.append($("<td></td>").append(deleteButton));
-              tableBody.append(row);
-            });
+            renderCustomers(data);
           }).fail(function (jqXHR, textStatus, errorThrown) {
             console.error(
               "Ошибка при получении данных клиентов:",
               textStatus,
               errorThrown
             );
+          });
+        }
+
+        function renderCustomers(customers) {
+          let tableBody = $("#customerTableBody");
+          tableBody.empty();
+          customers.forEach(function (customer) {
+            let row = $("<tr></tr>");
+            row.append(
+              $("<td></td>").append(
+                $('<input type="checkbox" class="selectCustomer">').val(customer.id)
+              )
+            );
+            row.append(
+              $("<td></td>")
+                .text(customer.id)
+                .click(function () {
+                  window.location.href = "customer_card.html?id=" + customer.id;
+                })
+                .css("cursor", "pointer")
+            );
+            row.append($("<td></td>").text(customer.name));
+            row.append($("<td></td>").text(customer.surname));
+            row.append($("<td></td>").text(customer.email));
+            row.append($("<td></td>").text(customer.phone));
+            let registrationDate = new Date(customer.registration_date);
+            if (!isNaN(registrationDate.getTime())) {
+              row.append(
+                $("<td></td>").text(
+                  registrationDate.toLocaleString("ru-RU", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  })
+                )
+              );
+            } else {
+              row.append($("<td></td>").text("Invalid Date"));
+            }
+
+            let deleteButton = $(
+              '<button class="btn-delete">Удалить</button>'
+            ).click(function () {
+              if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
+                $.ajax({
+                  type: "DELETE",
+                  url: "/delete_customer",
+                  data: JSON.stringify({ id: customer.id }),
+                  contentType: "application/json",
+                  success: function (response) {
+                    showAlert(response.message, 6000); // Показать сообщение на 3 секунды
+                    row.remove();
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(
+                      "Ошибка при удалении кастомера:",
+                      textStatus,
+                      errorThrown
+                    );
+                  },
+                });
+              }
+            });
+
+            row.append($("<td></td>").append(deleteButton));
+            tableBody.append(row);
           });
         }
 
@@ -215,10 +220,7 @@
             selectedIds.push($(this).val());
           });
 
-          if (
-            selectedIds.length > 0 &&
-            confirm("Вы уверены, что хотите удалить выбранных кастомеров?")
-          ) {
+          if (selectedIds.length > 0 && confirm("Вы уверены, что хотите удалить выбранных кастомеров?")) {
             $.ajax({
               type: "DELETE",
               url: "/delete_customers",
@@ -244,72 +246,7 @@
           let searchId = $("#searchId").val();
           if (searchId) {
             $.get("/customer/" + searchId, function (data) {
-              let tableBody = $("#customerTableBody");
-              tableBody.empty(); // Очищаем таблицу
-              let row = $("<tr></tr>");
-              row.append(
-                $("<td></td>").append(
-                  $('<input type="checkbox" class="selectCustomer">').val(
-                    data.id
-                  )
-                )
-              );
-              row.append(
-                $("<td></td>")
-                  .text(data.id)
-                  .click(function () {
-                    window.location.href = "customer_card.html?id=" + data.id;
-                  })
-                  .css("cursor", "pointer")
-              );
-              row.append($("<td></td>").text(data.name));
-              row.append($("<td></td>").text(data.surname));
-              row.append($("<td></td>").text(data.email));
-              row.append($("<td></td>").text(data.phone));
-              let registrationDate = new Date(data.registration_date);
-              if (!isNaN(registrationDate.getTime())) {
-                row.append(
-                  $("<td></td>").text(
-                    registrationDate.toLocaleString("ru-RU", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                    })
-                  )
-                );
-              } else {
-                row.append($("<td></td>").text("Invalid Date"));
-              }
-
-              let deleteButton = $(
-                '<button class="btn-delete">Удалить</button>'
-              ).click(function () {
-                if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
-                  $.ajax({
-                    type: "DELETE",
-                    url: "/delete_customer",
-                    data: JSON.stringify({ id: data.id }),
-                    contentType: "application/json",
-                    success: function (response) {
-                      showAlert(response.message, 6000); // Показать сообщение на 3 секунды
-                      row.remove();
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                      console.error(
-                        "Ошибка при удалении кастомера:",
-                        textStatus,
-                        errorThrown
-                      );
-                    },
-                  });
-                }
-              });
-
-              row.append($("<td></td>").append(deleteButton));
-              tableBody.append(row);
+              renderCustomers([data]); // Очищаем таблицу и рендерим результат поиска
             }).fail(function (jqXHR, textStatus, errorThrown) {
               console.error(
                 "Ошибка при поиске клиента:",
@@ -353,6 +290,49 @@
             document.body.removeChild(alertBox);
           }, duration);
         }
+
+        // Обработчик для сортировки по ID
+        $("#sortId").click(function () {
+          let tableBody = $("#customerTableBody");
+          let rows = tableBody.find("tr").toArray();
+          rows.sort(function (a, b) {
+            let aId = parseInt($(a).find("td:nth-child(2)").text());
+            let bId = parseInt($(b).find("td:nth-child(2)").text());
+            if (sortOrder === "asc") {
+              return aId - bId;
+            } else {
+              return bId - aId;
+            }
+          });
+          tableBody.empty().append(rows);
+          sortOrder = sortOrder === "asc" ? "desc" : "asc";
+
+          // Перепривязка событий удаления после сортировки
+          rows.forEach(function (row) {
+            $(row).find('.btn-delete').click(function () {
+              let customerId = $(this).closest('tr').find('td:nth-child(2)').text();
+              if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
+                $.ajax({
+                  type: "DELETE",
+                  url: "/delete_customer",
+                  data: JSON.stringify({ id: customerId }),
+                  contentType: "application/json",
+                  success: function (response) {
+                    showAlert(response.message, 6000); // Показать сообщение на 3 секунды
+                    $(row).remove();
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(
+                      "Ошибка при удалении кастомера:",
+                      textStatus,
+                      errorThrown
+                    );
+                  },
+                });
+              }
+            });
+          });
+        });
       });
     </script>
   </body>

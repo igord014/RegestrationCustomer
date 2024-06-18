@@ -1,157 +1,126 @@
 [
   {
-    "id": 1718713206825,
-    "timestamp": "2024-06-18T12:20:06.825Z",
+    "id": 1718725136895,
+    "timestamp": "2024-06-18T15:38:56.895Z",
     "method": "GET",
     "url": "/customers",
     "body": [
       {
-        "id": 42,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:19:41.789Z"
-      }
-    ]
-  },
-  {
-    "id": 1718713222050,
-    "timestamp": "2024-06-18T12:20:22.050Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718713222135,
-    "timestamp": "2024-06-18T12:20:22.135Z",
-    "method": "GET",
-    "url": "/customer/43",
-    "body": {
-      "id": 43,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-18T12:20:22.043Z"
-    }
-  },
-  {
-    "id": 1718713223586,
-    "timestamp": "2024-06-18T12:20:23.586Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "43",
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718713227682,
-    "timestamp": "2024-06-18T12:20:27.682Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 42,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:19:41.789Z"
-      },
-      {
-        "id": 43,
+        "id": 49,
         "name": "igora",
         "email": "igora@gmail.com",
         "phone": "0502584411",
         "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
+        "registration_date": "2024-06-18T13:41:50.474Z"
+      },
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
       }
     ]
   },
   {
-    "id": 1718713240682,
-    "timestamp": "2024-06-18T12:20:40.682Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718713240791,
-    "timestamp": "2024-06-18T12:20:40.791Z",
-    "method": "GET",
-    "url": "/customer/44",
-    "body": {
-      "id": 44,
-      "name": "Marc",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847",
-      "surname": "DeMarco",
-      "registration_date": "2024-06-18T12:20:40.675Z"
-    }
-  },
-  {
-    "id": 1718713243681,
-    "timestamp": "2024-06-18T12:20:43.681Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "44",
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718713247782,
-    "timestamp": "2024-06-18T12:20:47.782Z",
+    "id": 1718725146367,
+    "timestamp": "2024-06-18T15:39:06.367Z",
     "method": "GET",
     "url": "/customers",
     "body": [
       {
-        "id": 42,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:19:41.789Z"
-      },
-      {
-        "id": 43,
+        "id": 49,
         "name": "igora",
         "email": "igora@gmail.com",
         "phone": "0502584411",
         "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
+        "registration_date": "2024-06-18T13:41:50.474Z"
       },
       {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
       }
     ]
   },
   {
-    "id": 1718713273751,
-    "timestamp": "2024-06-18T12:21:13.751Z",
+    "id": 1718725155636,
+    "timestamp": "2024-06-18T15:39:15.636Z",
+    "method": "GET",
+    "url": "/customer/50",
+    "body": {
+      "id": 50,
+      "name": "jon",
+      "email": "jon@gmail.com",
+      "phone": "0503332211",
+      "surname": "bill",
+      "registration_date": "2024-06-18T15:38:38.980Z"
+    }
+  },
+  {
+    "id": 1718725167583,
+    "timestamp": "2024-06-18T15:39:27.583Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 49,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout",
+        "registration_date": "2024-06-18T13:41:50.474Z"
+      },
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725177525,
+    "timestamp": "2024-06-18T15:39:37.525Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 49,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout",
+        "registration_date": "2024-06-18T13:41:50.474Z"
+      },
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725184294,
+    "timestamp": "2024-06-18T15:39:44.294Z",
+    "method": "DELETE",
+    "url": "/delete_customer",
+    "body": {
+      "id": 49
+    }
+  },
+  {
+    "id": 1718725202104,
+    "timestamp": "2024-06-18T15:40:02.104Z",
     "method": "POST",
     "url": "/register",
     "body": {
@@ -162,26 +131,26 @@
     }
   },
   {
-    "id": 1718713273845,
-    "timestamp": "2024-06-18T12:21:13.845Z",
+    "id": 1718725202240,
+    "timestamp": "2024-06-18T15:40:02.240Z",
     "method": "GET",
-    "url": "/customer/45",
+    "url": "/customer/51",
     "body": {
-      "id": 45,
+      "id": 51,
       "name": "qwe",
       "email": "igordobkin222@gmail.com",
       "phone": "972569873366",
       "surname": "tre",
-      "registration_date": "2024-06-18T12:21:13.744Z"
+      "registration_date": "2024-06-18T15:40:02.092Z"
     }
   },
   {
-    "id": 1718713281813,
-    "timestamp": "2024-06-18T12:21:21.813Z",
+    "id": 1718725203525,
+    "timestamp": "2024-06-18T15:40:03.525Z",
     "method": "POST",
     "url": "/update_customer",
     "body": {
-      "id": "45",
+      "id": "51",
       "name": "qwe",
       "surname": "tre",
       "email": "igordobkin222@gmail.com",
@@ -189,796 +158,253 @@
     }
   },
   {
-    "id": 1718713285922,
-    "timestamp": "2024-06-18T12:21:25.922Z",
+    "id": 1718725207664,
+    "timestamp": "2024-06-18T15:40:07.664Z",
     "method": "GET",
     "url": "/customers",
     "body": [
       {
-        "id": 42,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:19:41.789Z"
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
       },
       {
-        "id": 43,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
-      },
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 45,
+        "id": 51,
         "name": "qwe",
         "email": "igordobkin222@gmail.com",
         "phone": "972569873366",
         "surname": "tre",
-        "registration_date": "2024-06-18T12:21:13.744Z"
+        "registration_date": "2024-06-18T15:40:02.092Z"
       }
     ]
   },
   {
-    "id": 1718713300489,
-    "timestamp": "2024-06-18T12:21:40.489Z",
+    "id": 1718725216729,
+    "timestamp": "2024-06-18T15:40:16.729Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "name": "Igor014",
+      "surname": "Dobkin",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022"
+    }
+  },
+  {
+    "id": 1718725216855,
+    "timestamp": "2024-06-18T15:40:16.855Z",
+    "method": "GET",
+    "url": "/customer/52",
+    "body": {
+      "id": 52,
+      "name": "Igor014",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022",
+      "surname": "Dobkin",
+      "registration_date": "2024-06-18T15:40:16.715Z"
+    }
+  },
+  {
+    "id": 1718725218813,
+    "timestamp": "2024-06-18T15:40:18.813Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "52",
+      "name": "Igor014",
+      "surname": "Dobkin",
+      "email": "igord014@gmail.com",
+      "phone": "0503610022"
+    }
+  },
+  {
+    "id": 1718725223004,
+    "timestamp": "2024-06-18T15:40:23.004Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      },
+      {
+        "id": 51,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-18T15:40:02.092Z"
+      },
+      {
+        "id": 52,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T15:40:16.715Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725224397,
+    "timestamp": "2024-06-18T15:40:24.397Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      },
+      {
+        "id": 51,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-18T15:40:02.092Z"
+      },
+      {
+        "id": 52,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T15:40:16.715Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725255461,
+    "timestamp": "2024-06-18T15:40:55.461Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      },
+      {
+        "id": 51,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-18T15:40:02.092Z"
+      },
+      {
+        "id": 52,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T15:40:16.715Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725267972,
+    "timestamp": "2024-06-18T15:41:07.972Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "name": "Marc",
+      "surname": "DeMarco",
+      "email": "Marc@gmail.com",
+      "phone": "380963695847"
+    }
+  },
+  {
+    "id": 1718725268110,
+    "timestamp": "2024-06-18T15:41:08.110Z",
+    "method": "GET",
+    "url": "/customer/53",
+    "body": {
+      "id": 53,
+      "name": "Marc",
+      "email": "Marc@gmail.com",
+      "phone": "380963695847",
+      "surname": "DeMarco",
+      "registration_date": "2024-06-18T15:41:07.949Z"
+    }
+  },
+  {
+    "id": 1718725269506,
+    "timestamp": "2024-06-18T15:41:09.506Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "53",
+      "name": "Marc",
+      "surname": "DeMarco",
+      "email": "Marc@gmail.com",
+      "phone": "380963695847"
+    }
+  },
+  {
+    "id": 1718725273637,
+    "timestamp": "2024-06-18T15:41:13.637Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 50,
+        "name": "jon",
+        "email": "jon@gmail.com",
+        "phone": "0503332211",
+        "surname": "bill",
+        "registration_date": "2024-06-18T15:38:38.980Z"
+      },
+      {
+        "id": 51,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-18T15:40:02.092Z"
+      },
+      {
+        "id": 52,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T15:40:16.715Z"
+      },
+      {
+        "id": 53,
+        "name": "Marc",
+        "email": "Marc@gmail.com",
+        "phone": "380963695847",
+        "surname": "DeMarco",
+        "registration_date": "2024-06-18T15:41:07.949Z"
+      }
+    ]
+  },
+  {
+    "id": 1718725282462,
+    "timestamp": "2024-06-18T15:41:22.462Z",
     "method": "DELETE",
     "url": "/delete_customers",
     "body": {
       "ids": [
-        "42",
-        "45"
+        "50",
+        "51"
       ]
     }
-  },
-  {
-    "id": 1718713313867,
-    "timestamp": "2024-06-18T12:21:53.867Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 43,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
-      },
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      }
-    ]
-  },
-  {
-    "id": 1718713457127,
-    "timestamp": "2024-06-18T12:24:17.127Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 43,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
-      },
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      }
-    ]
-  },
-  {
-    "id": 1718713483677,
-    "timestamp": "2024-06-18T12:24:43.677Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "golden",
-      "surname": "test",
-      "email": "golden@gmail.com",
-      "phone": "0502361144"
-    }
-  },
-  {
-    "id": 1718713483867,
-    "timestamp": "2024-06-18T12:24:43.867Z",
-    "method": "GET",
-    "url": "/customer/46",
-    "body": {
-      "id": 46,
-      "name": "golden",
-      "email": "golden@gmail.com",
-      "phone": "0502361144",
-      "surname": "test",
-      "registration_date": "2024-06-18T12:24:43.668Z"
-    }
-  },
-  {
-    "id": 1718713488587,
-    "timestamp": "2024-06-18T12:24:48.587Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "46",
-      "name": "golden",
-      "surname": "test",
-      "email": "golden@gmail.com",
-      "phone": "0502361144"
-    }
-  },
-  {
-    "id": 1718713492813,
-    "timestamp": "2024-06-18T12:24:52.813Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 43,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T12:20:22.043Z"
-      },
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718713513953,
-    "timestamp": "2024-06-18T12:25:13.953Z",
-    "method": "DELETE",
-    "url": "/delete_customer",
-    "body": {
-      "id": 43
-    }
-  },
-  {
-    "id": 1718713532762,
-    "timestamp": "2024-06-18T12:25:32.762Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718713560207,
-    "timestamp": "2024-06-18T12:26:00.207Z",
-    "method": "GET",
-    "url": "/customer/44",
-    "body": {
-      "id": 44,
-      "name": "Marc",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847",
-      "surname": "DeMarco",
-      "registration_date": "2024-06-18T12:20:40.675Z"
-    }
-  },
-  {
-    "id": 1718713568270,
-    "timestamp": "2024-06-18T12:26:08.270Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "44",
-      "name": "Marc",
-      "surname": "DeMarcog",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718713572471,
-    "timestamp": "2024-06-18T12:26:12.471Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718717197304,
-    "timestamp": "2024-06-18T13:26:37.304Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718717979623,
-    "timestamp": "2024-06-18T13:39:39.623Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718717990159,
-    "timestamp": "2024-06-18T13:39:50.159Z",
-    "method": "GET",
-    "url": "/customer/5"
-  },
-  {
-    "id": 1718718011582,
-    "timestamp": "2024-06-18T13:40:11.582Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718016901,
-    "timestamp": "2024-06-18T13:40:16.901Z",
-    "method": "GET",
-    "url": "/customer/44",
-    "body": {
-      "id": 44,
-      "name": "Marc",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847",
-      "surname": "DeMarcog",
-      "registration_date": "2024-06-18T12:20:40.675Z"
-    }
-  },
-  {
-    "id": 1718718046336,
-    "timestamp": "2024-06-18T13:40:46.336Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718051533,
-    "timestamp": "2024-06-18T13:40:51.533Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 44,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarcog",
-        "registration_date": "2024-06-18T12:20:40.675Z"
-      },
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718059805,
-    "timestamp": "2024-06-18T13:40:59.805Z",
-    "method": "DELETE",
-    "url": "/delete_customer",
-    "body": {
-      "id": 44
-    }
-  },
-  {
-    "id": 1718718066069,
-    "timestamp": "2024-06-18T13:41:06.069Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718718066190,
-    "timestamp": "2024-06-18T13:41:06.190Z",
-    "method": "GET",
-    "url": "/customer/47",
-    "body": {
-      "id": 47,
-      "name": "Marc",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847",
-      "surname": "DeMarco",
-      "registration_date": "2024-06-18T13:41:06.058Z"
-    }
-  },
-  {
-    "id": 1718718067242,
-    "timestamp": "2024-06-18T13:41:07.242Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "47",
-      "name": "Marc",
-      "surname": "DeMarco",
-      "email": "Marc@gmail.com",
-      "phone": "380963695847"
-    }
-  },
-  {
-    "id": 1718718071363,
-    "timestamp": "2024-06-18T13:41:11.363Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718087419,
-    "timestamp": "2024-06-18T13:41:27.419Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "igord",
-      "surname": "red",
-      "email": "Igord@gmail.com",
-      "phone": "0505642255"
-    }
-  },
-  {
-    "id": 1718718087558,
-    "timestamp": "2024-06-18T13:41:27.558Z",
-    "method": "GET",
-    "url": "/customer/48",
-    "body": {
-      "id": 48,
-      "name": "igord",
-      "email": "Igord@gmail.com",
-      "phone": "0505642255",
-      "surname": "red",
-      "registration_date": "2024-06-18T13:41:27.408Z"
-    }
-  },
-  {
-    "id": 1718718090069,
-    "timestamp": "2024-06-18T13:41:30.069Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "48",
-      "name": "igord",
-      "surname": "red",
-      "email": "Igord@gmail.com",
-      "phone": "0505642255"
-    }
-  },
-  {
-    "id": 1718718094251,
-    "timestamp": "2024-06-18T13:41:34.251Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      },
-      {
-        "id": 48,
-        "name": "igord",
-        "email": "Igord@gmail.com",
-        "phone": "0505642255",
-        "surname": "red",
-        "registration_date": "2024-06-18T13:41:27.408Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718110496,
-    "timestamp": "2024-06-18T13:41:50.496Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718718110623,
-    "timestamp": "2024-06-18T13:41:50.623Z",
-    "method": "GET",
-    "url": "/customer/49",
-    "body": {
-      "id": 49,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-18T13:41:50.474Z"
-    }
-  },
-  {
-    "id": 1718718112141,
-    "timestamp": "2024-06-18T13:41:52.141Z",
-    "method": "POST",
-    "url": "/update_customer",
-    "body": {
-      "id": "49",
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718718116264,
-    "timestamp": "2024-06-18T13:41:56.264Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      },
-      {
-        "id": 48,
-        "name": "igord",
-        "email": "Igord@gmail.com",
-        "phone": "0505642255",
-        "surname": "red",
-        "registration_date": "2024-06-18T13:41:27.408Z"
-      },
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718129107,
-    "timestamp": "2024-06-18T13:42:09.107Z",
-    "method": "GET",
-    "url": "/customer/49",
-    "body": {
-      "id": 49,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-18T13:41:50.474Z"
-    }
-  },
-  {
-    "id": 1718718151418,
-    "timestamp": "2024-06-18T13:42:31.418Z",
-    "method": "GET",
-    "url": "/customer/49",
-    "body": {
-      "id": 49,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-18T13:41:50.474Z"
-    }
-  },
-  {
-    "id": 1718718501460,
-    "timestamp": "2024-06-18T13:48:21.460Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      },
-      {
-        "id": 48,
-        "name": "igord",
-        "email": "Igord@gmail.com",
-        "phone": "0505642255",
-        "surname": "red",
-        "registration_date": "2024-06-18T13:41:27.408Z"
-      },
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718511073,
-    "timestamp": "2024-06-18T13:48:31.073Z",
-    "method": "GET",
-    "url": "/customer/46",
-    "body": {
-      "id": 46,
-      "name": "golden",
-      "email": "golden@gmail.com",
-      "phone": "0502361144",
-      "surname": "test",
-      "registration_date": "2024-06-18T12:24:43.668Z"
-    }
-  },
-  {
-    "id": 1718718514838,
-    "timestamp": "2024-06-18T13:48:34.838Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      },
-      {
-        "id": 48,
-        "name": "igord",
-        "email": "Igord@gmail.com",
-        "phone": "0505642255",
-        "surname": "red",
-        "registration_date": "2024-06-18T13:41:27.408Z"
-      },
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      }
-    ]
-  },
-  {
-    "id": 1718718523328,
-    "timestamp": "2024-06-18T13:48:43.328Z",
-    "method": "GET",
-    "url": "/customer/48",
-    "body": {
-      "id": 48,
-      "name": "igord",
-      "email": "Igord@gmail.com",
-      "phone": "0505642255",
-      "surname": "red",
-      "registration_date": "2024-06-18T13:41:27.408Z"
-    }
-  },
-  {
-    "id": 1718718524403,
-    "timestamp": "2024-06-18T13:48:44.403Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 46,
-        "name": "golden",
-        "email": "golden@gmail.com",
-        "phone": "0502361144",
-        "surname": "test",
-        "registration_date": "2024-06-18T12:24:43.668Z"
-      },
-      {
-        "id": 47,
-        "name": "Marc",
-        "email": "Marc@gmail.com",
-        "phone": "380963695847",
-        "surname": "DeMarco",
-        "registration_date": "2024-06-18T13:41:06.058Z"
-      },
-      {
-        "id": 48,
-        "name": "igord",
-        "email": "Igord@gmail.com",
-        "phone": "0505642255",
-        "surname": "red",
-        "registration_date": "2024-06-18T13:41:27.408Z"
-      },
-      {
-        "id": 49,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-18T13:41:50.474Z"
-      }
-    ]
   }
 ]
