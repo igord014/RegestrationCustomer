@@ -132,8 +132,10 @@
             } else {
               row.append($("<td></td>").text("Invalid Date"));
             }
+            
             let deleteButton = $(
               '<button class="btn-delete">Удалить</button>'
+
             ).click(function () {
               if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
                 $.ajax({
@@ -142,7 +144,7 @@
                   data: JSON.stringify({ id: customer.id }),
                   contentType: "application/json",
                   success: function (response) {
-                    showTemporaryAlert(response.message, 6000); // Показать сообщение на 3 секунды
+                    //showTemporaryAlert(response.message, 6000); // Показать сообщение на 3 секунды
                     showAlert(response.message, 6000); // Показать сообщение на 3 секунды
                     row.remove();
                   },
