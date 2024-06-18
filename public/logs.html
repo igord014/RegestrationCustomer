@@ -1,135 +1,124 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Логи запросов</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
-      .container {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        
-        max-height: 90vh;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      .table-container {
-        overflow-y: auto;
-        overflow-x: auto;
-        flex-grow: 1;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 600px; /* Устанавливаем минимальную ширину для таблицы */
-      }
-      th,
-      td {
-        padding: 12px;
-        border: 1px solid #ddd;
-        text-align: left;
-      }
-      th {
-        background-color: #6a0dad;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1;
-      }
-      tr:hover {
-        background-color: #f1f1f1;
-      }
-      .btn-primary {
-        background-color: #6a0dad;
-        border: none;
-        padding: 10px 20px;
-        color: #fff;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 10px;
-        display: inline-block;
-        align-self: flex-start; /* Располагает кнопку слева */
-      }
-      .btn-primary:hover {
-        background-color: #5a0cbe;
-      }
-      .sticky-header {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 2;
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
-    </style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        .container {
+          background-color: #fff;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+          width: 90%;
+          max-width: auto;
+          max-height: 90vh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .table-container {
+          overflow-y: auto;
+          overflow-x: auto;
+          flex-grow: 1;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 600px; /* Устанавливаем минимальную ширину для таблицы */
+        }
+        th,
+        td {
+          padding: 12px;
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+        th {
+          background-color: #6a0dad;
+          color: white;
+          position: sticky;
+          top: 0;
+          z-index: 1;
+        }
+        tr:hover {
+          background-color: #f1f1f1;
+        }
+        .btn-primary {
+          background-color: #6a0dad;
+          border: none;
+          padding: 10px 20px;
+          color: #fff;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-bottom: 10px;
+          display: inline-block;
+          align-self: flex-start; /* Располагает кнопку слева */
+        }
+        .btn-primary:hover {
+          background-color: #5a0cbe;
+        }
+        .sticky-header {
+          position: sticky;
+          top: 0;
+          background-color: white;
+          z-index: 2;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <h1>Логи запросов</h1>
-      <button
-        class="btn-primary"
-        onclick="window.location.href='customer_table.html'"
-      >
-        Назад к таблице кастомеров
-      </button>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Время</th>
-              <th>Дата</th>
-              <th>Запрос</th>
-              <th>Тело лога</th>
-            </tr>
-          </thead>
-          <tbody id="logsTableBody">
-            <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
-          </tbody>
-        </table>
-      </div>
+        <h1>Логи запросов</h1>
+        <button class="btn-primary" onclick="window.location.href='customer_table.html'">Назад к таблице кастомеров</button>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Время</th>
+                        <th>Дата</th>
+                        <th>Запрос</th>
+                        <th>Тело лога</th>
+                    </tr>
+                </thead>
+                <tbody id="logsTableBody">
+                    <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
-      $(document).ready(function () {
-        // Получаем данные логов с сервера
-        $.get("/logs", function (data) {
-          let tableBody = $("#logsTableBody");
-          data.forEach(function (log) {
-            let row = $("<tr></tr>");
-            row.append($("<td></td>").text(log.id));
-            row.append(
-              $("<td></td>").text(
-                new Date(log.timestamp).toLocaleTimeString("ru-RU")
-              )
-            );
-            row.append(
-              $("<td></td>").text(
-                new Date(log.timestamp).toLocaleDateString("ru-RU")
-              )
-            );
-            row.append($("<td></td>").text(log.method + " " + log.url));
-            row.append($("<td></td>").text(JSON.stringify(log.body)));
-            tableBody.append(row);
-          });
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-          console.error("Ошибка при получении логов:", textStatus, errorThrown);
+        $(document).ready(function() {
+            // Получаем данные логов с сервера
+            $.get('/logs', function(data) {
+                let tableBody = $('#logsTableBody');
+                // Сортируем данные в обратном порядке
+                data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                data.forEach(function(log) {
+                    let row = $('<tr></tr>');
+                    row.append($('<td></td>').text(log.id));
+                    row.append($('<td></td>').text(new Date(log.timestamp).toLocaleTimeString('ru-RU')));
+                    row.append($('<td></td>').text(new Date(log.timestamp).toLocaleDateString('ru-RU')));
+                    row.append($('<td></td>').text(log.method + ' ' + log.url));
+                    row.append($('<td></td>').text(JSON.stringify(log.body)));
+                    tableBody.append(row);
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('Ошибка при получении логов:', textStatus, errorThrown);
+            });
         });
-      });
     </script>
-  </body>
+</body>
 </html>

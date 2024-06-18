@@ -706,5 +706,21 @@
         "registration_date": "2024-06-18T04:01:25.533Z"
       }
     ]
+  },
+  {
+    "id": 1718684405742,
+    "timestamp": "2024-06-18T04:20:05.742Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 21,
+        "name": "Igor",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkin",
+        "registration_date": "2024-06-18T04:01:25.533Z"
+      }
+    ]
   }
 ]
