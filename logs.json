@@ -87,5 +87,313 @@
         "registration_date": "2024-06-18T09:03:44.528Z"
       }
     ]
+  },
+  {
+    "id": 1718704979574,
+    "timestamp": "2024-06-18T10:02:59.574Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 35,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkins",
+        "registration_date": "2024-06-18T09:03:44.528Z"
+      }
+    ]
+  },
+  {
+    "id": 1718704990795,
+    "timestamp": "2024-06-18T10:03:10.795Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 35,
+        "name": "Igor014",
+        "email": "igord014@gmail.com",
+        "phone": "0503610022",
+        "surname": "Dobkins",
+        "registration_date": "2024-06-18T09:03:44.528Z"
+      }
+    ]
+  },
+  {
+    "id": 1718705029062,
+    "timestamp": "2024-06-18T10:03:49.062Z",
+    "method": "POST",
+    "url": "/register",
+    "body": {
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718705029185,
+    "timestamp": "2024-06-18T10:03:49.185Z",
+    "method": "GET",
+    "url": "/customer/36",
+    "body": {
+      "id": 36,
+      "name": "igord",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255",
+      "surname": "ser",
+      "registration_date": "2024-06-18T10:03:49.052Z"
+    }
+  },
+  {
+    "id": 1718705166072,
+    "timestamp": "2024-06-18T10:06:06.072Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718705168766,
+    "timestamp": "2024-06-18T10:06:08.766Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718705664184,
+    "timestamp": "2024-06-18T10:14:24.184Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718705676982,
+    "timestamp": "2024-06-18T10:14:36.982Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706301178,
+    "timestamp": "2024-06-18T10:25:01.178Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706305600,
+    "timestamp": "2024-06-18T10:25:05.600Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706311275,
+    "timestamp": "2024-06-18T10:25:11.275Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706777238,
+    "timestamp": "2024-06-18T10:32:57.238Z",
+    "method": "GET",
+    "url": "/customer/36",
+    "body": {
+      "id": 36,
+      "name": "igord",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255",
+      "surname": "ser",
+      "registration_date": "2024-06-18T10:03:49.052Z"
+    }
+  },
+  {
+    "id": 1718706779286,
+    "timestamp": "2024-06-18T10:32:59.286Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706787744,
+    "timestamp": "2024-06-18T10:33:07.744Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718706863371,
+    "timestamp": "2024-06-18T10:34:23.371Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707021242,
+    "timestamp": "2024-06-18T10:37:01.242Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707027041,
+    "timestamp": "2024-06-18T10:37:07.041Z",
+    "method": "GET",
+    "url": "/customer/36",
+    "body": {
+      "id": 36,
+      "name": "igord",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255",
+      "surname": "ser",
+      "registration_date": "2024-06-18T10:03:49.052Z"
+    }
+  },
+  {
+    "id": 1718707028707,
+    "timestamp": "2024-06-18T10:37:08.707Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707033589,
+    "timestamp": "2024-06-18T10:37:13.589Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707054783,
+    "timestamp": "2024-06-18T10:37:34.783Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707163849,
+    "timestamp": "2024-06-18T10:39:23.849Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
+  },
+  {
+    "id": 1718707166042,
+    "timestamp": "2024-06-18T10:39:26.042Z",
+    "method": "GET",
+    "url": "/customer/36",
+    "body": {
+      "id": 36,
+      "name": "igord",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255",
+      "surname": "ser",
+      "registration_date": "2024-06-18T10:03:49.052Z"
+    }
+  },
+  {
+    "id": 1718707167281,
+    "timestamp": "2024-06-18T10:39:27.281Z",
+    "method": "POST",
+    "url": "/update_customer",
+    "body": {
+      "id": "36",
+      "name": "igord",
+      "surname": "ser",
+      "email": "Igord@gmail.com",
+      "phone": "0505642255"
+    }
   }
 ]
