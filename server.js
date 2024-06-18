@@ -22,9 +22,7 @@ db.serialize(() => {
         registration_date TEXT
     )`);
 
-  // Проверка и добавление столбца registration_date, если его нет
   db.all("PRAGMA table_info(customer);", (err, columns) => {
-    // Добавлено для проверки столбцов таблицы
     if (err) {
       console.error("Ошибка при получении информации о таблице:", err.message);
     } else {
@@ -33,7 +31,6 @@ db.serialize(() => {
         db.run(
           `ALTER TABLE customer ADD COLUMN registration_date TEXT`,
           (err) => {
-            // Добавлено для добавления столбца registration_date
             if (err) {
               console.error(
                 "Ошибка при добавлении столбца registration_date:",
@@ -136,20 +133,19 @@ app.post("/update_customer", (req, res) => {
 });
 
 app.delete("/delete_customer", (req, res) => {
-  // Изменено с POST на DELETE
   let { id } = req.body;
   console.log("Получен запрос на удаление клиента с ID:", id);
 
   db.run(`DELETE FROM customer WHERE id = ?`, [id], function (err) {
     if (err) {
       console.error("Ошибка при удалении данных:", err.message);
-      logToFile("DELETE", "/delete_customer", { error: err.message }); // Изменено с POST на DELETE
+      logToFile("DELETE", "/delete_customer", { error: err.message });
       return res
         .status(500)
         .json({ error: "Ошибка при удалении данных", details: err.message });
     }
     console.log("Кастомер успешно удален с ID:", id);
-    logToFile("DELETE", "/delete_customer", req.body); // Изменено с POST на DELETE
+    logToFile("DELETE", "/delete_customer", req.body);
     res.send({ message: "Customer deleted successfully" });
   });
 });
@@ -189,7 +185,6 @@ app.get("/customers", (req, res) => {
   });
 });
 
-// Маршрут для проверки уникальности данных
 app.post("/check_unique", (req, res) => {
   let { email, phone } = req.body;
   console.log("Получен запрос на проверку уникальности:", { email, phone });
@@ -216,7 +211,6 @@ app.post("/check_unique", (req, res) => {
   );
 });
 
-// Маршрут для получения логов
 app.get("/logs", (req, res) => {
   fs.readFile("logs.json", (err, data) => {
     if (err) {
@@ -229,11 +223,8 @@ app.get("/logs", (req, res) => {
   });
 });
 
-// Маршрут для очистки логов
 app.delete("/logs", (req, res) => {
-  // Добавлен маршрут для очистки логов
   fs.writeFile("logs.json", JSON.stringify([], null, 2), (err) => {
-    // Очищаем содержимое файла логов
     if (err) {
       console.error("Ошибка при очистке логов:", err.message);
       return res
@@ -245,7 +236,6 @@ app.delete("/logs", (req, res) => {
 });
 
 app.delete("/delete_customers", (req, res) => {
-  // Новый маршрут для удаления нескольких кастомеров
   let { ids } = req.body;
   console.log("Получен запрос на удаление клиентов с ID:", ids);
 
