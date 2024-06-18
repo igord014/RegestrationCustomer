@@ -66,6 +66,7 @@
         font-size: 10px;
         line-height: 10px;
         cursor: pointer;
+        margin: 3px 0; /* Добавлено для увеличения расстояния между стрелками */
       }
       .btn-primary,
       .btn-logs,
@@ -92,6 +93,7 @@
         color: #fff;
         border-radius: 5px;
         cursor: pointer;
+        margin-right: 5px; /* Добавлено расстояние между кнопками */
       }
       .btn-delete:hover,
       .btn-edit:hover {
@@ -106,17 +108,12 @@
       <div class="search-container">
         <input type="text" id="searchId" placeholder="Поиск по ID" />
         <button class="btn-primary" id="searchButton">Поиск</button>
-        <button class="btn-primary" id="clearSearchButton">
-          Очистить поиск
-        </button>
+        <button class="btn-primary" id="clearSearchButton">Очистить поиск</button>
       </div>
       <button class="btn-logs" onclick="window.location.href='logs.html'">
         Просмотреть логи
       </button>
-      <button
-        class="btn-primary"
-        onclick="window.location.href='registration_form.html'"
-      >
+      <button class="btn-primary" onclick="window.location.href='registration_form.html'">
         Добавить кастомера
       </button>
       <button class="btn-delete-all" id="deleteSelected">
@@ -204,7 +201,7 @@
             if (!isNaN(registrationDate.getTime())) {
               row.append(
                 $("<td></td>")
-                  .attr("data-date", registrationDate.toISOString())
+                  .attr("data-date", registrationDate.toISOString()) // Добавлен атрибут data-date
                   .text(
                     registrationDate.toLocaleString("ru-RU", {
                       year: "numeric",
@@ -231,10 +228,7 @@
                 $.ajax({
                   type: "PUT",
                   url: "/update_customer_date",
-                  data: JSON.stringify({
-                    id: customer.id,
-                    registration_date: newDate,
-                  }),
+                  data: JSON.stringify({ id: customer.id, registration_date: newDate }),
                   contentType: "application/json",
                   success: function (response) {
                     showAlert(response.message, 6000);
@@ -320,6 +314,17 @@
 
         // Обработчик для кнопки "Поиск"
         $("#searchButton").click(function () {
+          performSearch();
+        });
+
+        // Обработчик для нажатия клавиши Enter в поле поиска
+        $("#searchId").keypress(function (event) {
+          if (event.which == 13) { // Проверка нажатия клавиши Enter
+            performSearch();
+          }
+        });
+
+        function performSearch() {
           let searchId = $("#searchId").val();
           if (searchId) {
             $.get("/customer/" + searchId, function (data) {
@@ -332,7 +337,7 @@
               );
             });
           }
-        });
+        }
 
         // Обработчик для кнопки "Очистить поиск"
         $("#clearSearchButton").click(function () {
@@ -403,12 +408,8 @@
               let bId = parseInt($(b).find("td:nth-child(2)").text());
               return sortOrder === "asc" ? aId - bId : bId - aId;
             } else if (sortColumn === "date") {
-              let aDate = new Date(
-                $(a).find("td:nth-child(7)").attr("data-date")
-              );
-              let bDate = new Date(
-                $(b).find("td:nth-child(7)").attr("data-date")
-              );
+              let aDate = new Date($(a).find("td:nth-child(7)").attr("data-date")); // Изменено для использования data-date
+              let bDate = new Date($(b).find("td:nth-child(7)").attr("data-date")); // Изменено для использования data-date
               return sortOrder === "asc" ? aDate - bDate : bDate - aDate;
             }
           });
