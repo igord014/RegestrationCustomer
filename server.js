@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs");
 const path = require("path");
-const multer = require("multer"); // Добавлен для обработки загрузки файлов
-const xlsx = require("xlsx"); // Добавлен для работы с файлами Excel
+const multer = require("multer");
+const xlsx = require("xlsx");
 
 const app = express();
 const PORT = 3001;
@@ -24,7 +24,6 @@ db.serialize(() => {
         registration_date TEXT
     )`);
 
-  // Проверка и добавление столбца registration_date, если его нет
   db.all("PRAGMA table_info(customer);", (err, columns) => {
     if (err) {
       console.error("Ошибка при получении информации о таблице:", err.message);
@@ -106,9 +105,10 @@ app.post("/register", (req, res) => {
   );
 });
 
+// Вставьте этот код для маршрута обновления даты регистрации кастомера здесь
 app.put("/update_customer_date", (req, res) => {
   let { id, registration_date } = req.body;
-  console.log("Получены данные для обновления даты регистрации:", {
+  console.log("Получены данные для обновления даты регистрации кастомера:", {
     id,
     registration_date,
   });
@@ -120,16 +120,43 @@ app.put("/update_customer_date", (req, res) => {
       if (err) {
         console.error("Ошибка при обновлении даты регистрации:", err.message);
         logToFile("PUT", "/update_customer_date", { error: err.message });
-        return res
-          .status(500)
-          .json({
-            error: "Ошибка при обновлении даты регистрации",
-            details: err.message,
-          });
+        return res.status(500).json({
+          error: "Ошибка при обновлении даты регистрации",
+          details: err.message,
+        });
       }
       console.log("Дата регистрации успешно обновлена для ID:", id);
       logToFile("PUT", "/update_customer_date", req.body);
-      res.send({ message: "Registration date updated successfully" });
+      res.send({ message: "Дата регистрации успешно обновлена" });
+    }
+  );
+});
+
+app.put("/update_customer", (req, res) => {
+  let { id, name, surname, email, phone } = req.body;
+  console.log("Получены данные для обновления кастомера:", {
+    id,
+    name,
+    surname,
+    email,
+    phone,
+  });
+
+  db.run(
+    `UPDATE customer SET name = ?, surname = ?, email = ?, phone = ? WHERE id = ?`,
+    [name, surname, email, phone, id],
+    function (err) {
+      if (err) {
+        console.error("Ошибка при обновлении данных:", err.message);
+        logToFile("PUT", "/update_customer", { error: err.message });
+        return res.status(500).json({
+          error: "Ошибка при обновлении данных",
+          details: err.message,
+        });
+      }
+      console.log("Данные успешно обновлены для ID:", id);
+      logToFile("PUT", "/update_customer", req.body);
+      res.send({ message: "Customer updated successfully" });
     }
   );
 });
@@ -176,12 +203,10 @@ app.get("/customers", (req, res) => {
     if (err) {
       console.error("Ошибка при извлечении всех данных:", err.message);
       logToFile("GET", "/customers", { error: err.message });
-      return res
-        .status(500)
-        .json({
-          error: "Ошибка при извлечении всех данных",
-          details: err.message,
-        });
+      return res.status(500).json({
+        error: "Ошибка при извлечении всех данных",
+        details: err.message,
+      });
     }
     console.log("Все клиенты:", rows);
     logToFile("GET", "/customers", rows);
@@ -189,7 +214,6 @@ app.get("/customers", (req, res) => {
   });
 });
 
-// Маршрут для проверки уникальности данных
 app.post("/check_unique", (req, res) => {
   let { email, phone } = req.body;
   console.log("Получен запрос на проверку уникальности:", { email, phone });
@@ -201,12 +225,10 @@ app.post("/check_unique", (req, res) => {
       if (err) {
         console.error("Ошибка при проверке уникальности:", err.message);
         logToFile("POST", "/check_unique", { error: err.message });
-        return res
-          .status(500)
-          .json({
-            error: "Ошибка при проверке уникальности",
-            details: err.message,
-          });
+        return res.status(500).json({
+          error: "Ошибка при проверке уникальности",
+          details: err.message,
+        });
       }
       if (row) {
         console.log("Найдены дублирующиеся данные:", row);
@@ -218,7 +240,6 @@ app.post("/check_unique", (req, res) => {
   );
 });
 
-// Маршрут для получения логов
 app.get("/logs", (req, res) => {
   fs.readFile("logs.json", (err, data) => {
     if (err) {
@@ -231,7 +252,6 @@ app.get("/logs", (req, res) => {
   });
 });
 
-// Маршрут для очистки логов
 app.delete("/logs", (req, res) => {
   fs.writeFile("logs.json", JSON.stringify([], null, 2), (err) => {
     if (err) {
@@ -265,10 +285,8 @@ app.delete("/delete_customers", (req, res) => {
   });
 });
 
-// Настройка multer для обработки загрузки файлов
 const upload = multer({ dest: "uploads/" });
 
-// Маршрут для загрузки файла Excel
 app.post("/upload_excel", upload.single("excelFile"), (req, res) => {
   if (!req.file) {
     return res.status(400).send("Файл не загружен");
