@@ -579,15 +579,22 @@
                 return $(this).data("column");
               })
               .get();
-            $("thead tr th").each(function (index) {
-              $(this).css("order", headers[index]);
+            let tableHeaders = $("thead tr th").toArray();
+            tableHeaders.sort(function (a, b) {
+              return (
+                headers.indexOf($(a).index()) - headers.indexOf($(b).index())
+              );
             });
-            $("tbody tr").each(function () {
-              $(this)
-                .find("td")
-                .each(function (index) {
-                  $(this).css("order", headers[index]);
-                });
+            $("thead tr").append(tableHeaders);
+
+            $("#customerTableBody tr").each(function () {
+              let rowCells = $(this).find("td").toArray();
+              rowCells.sort(function (a, b) {
+                return (
+                  headers.indexOf($(a).index()) - headers.indexOf($(b).index())
+                );
+              });
+              $(this).append(rowCells);
             });
           },
         });
@@ -613,7 +620,8 @@
           }
         });
       });
-      //Клик в сторону
+
+      //Клик в сторону для скрытия колонок
       $(document).click(function (event) {
         if (!$(event.target).closest("#columnManager, #columnToggle").length) {
           $("#columnManager").hide();
