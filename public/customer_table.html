@@ -145,7 +145,7 @@
       #columnToggle {
         position: absolute;
         top: 30px;
-        right: 0;
+        right: 30px;
         background-color: #6a0dad;
         color: #fff;
         border: none;
@@ -165,7 +165,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Таблица кастомеров</h1>
+      <h1 style="font-size: 1em">Таблица кастомеров</h1>
       <div class="search-container">
         <input type="text" id="searchId" placeholder="Поиск по ID" />
         <button class="btn-primary" id="searchButton">Поиск</button>
@@ -612,6 +612,12 @@
             ).toggle(isChecked);
           }
         });
+      });
+      //Клик в сторону
+      $(document).click(function (event) {
+        if (!$(event.target).closest("#columnManager, #columnToggle").length) {
+          $("#columnManager").hide();
+        }
       });
     </script>
   </body>
