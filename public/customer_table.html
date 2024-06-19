@@ -155,6 +155,29 @@
         margin-top: 10px;
         margin-right: 10px;
       }
+
+      /* Добавляем стили для кнопки при загрузке файла */
+      #uploadButton.loading {
+        background-color: #5a0cbe;
+        cursor: not-allowed;
+      }
+
+      /* Добавляем мигание кнопке */
+      #uploadButton.flashing {
+        animation: flash 1s infinite;
+      }
+
+      @keyframes flash {
+        0% {
+          background-color: #6a0dad;
+        }
+        50% {
+          background-color: #32cd32; /* Зелёный цвет */
+        }
+        100% {
+          background-color: #6a0dad;
+        }
+      }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -182,7 +205,7 @@
       >
         Добавить кастомера
       </button>
-      <button class="btn-delete-all" id="deleteSelected">
+      <button class="btn-delete-all" id="deleteSelected" style="background-color: #ff4500;">
         Удалить выбранные
       </button>
 
@@ -195,7 +218,9 @@
           accept=".xlsx, .xls"
           required
         />
-        <button type="submit" class="btn-primary">Загрузить файл</button>
+        <button type="submit" id="uploadButton" class="btn-primary">
+          Загрузить файл
+        </button>
       </form>
 
       <button id="columnToggle">Управление колонками</button>
@@ -546,6 +571,11 @@
         $("#uploadForm").submit(function (e) {
           e.preventDefault();
           let formData = new FormData(this);
+
+          let uploadButton = $("#uploadButton");
+          uploadButton.addClass("loading"); // Добавляем класс для анимации
+          uploadButton.removeClass("flashing"); // Убираем мигание после загрузки
+
           $.ajax({
             type: "POST",
             url: "/upload_excel",
@@ -555,6 +585,7 @@
             success: function (response) {
               showAlert(response.message, 6000);
               loadCustomers();
+              uploadButton.removeClass("loading"); // Убираем класс после загрузки
             },
             error: function (jqXHR, textStatus, errorThrown) {
               console.error(
@@ -562,8 +593,17 @@
                 textStatus,
                 errorThrown
               );
+              uploadButton.removeClass("loading"); // Убираем класс при ошибке
             },
           });
+        });
+
+        // Добавляем событие изменения файла, чтобы начать мигание кнопки
+        $("#excelFile").change(function () {
+          let uploadButton = $("#uploadButton");
+          if (this.files.length > 0) {
+            uploadButton.addClass("flashing");
+          }
         });
 
         // Обработчик для открытия/закрытия меню управления колонками
