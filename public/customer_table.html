@@ -205,7 +205,7 @@
       >
         Добавить кастомера
       </button>
-      <button class="btn-delete-all" id="deleteSelected" style="background-color: #ff4500;">
+      <button class="btn-delete-all" id="deleteSelected">
         Удалить выбранные
       </button>
 
@@ -220,6 +220,9 @@
         />
         <button type="submit" id="uploadButton" class="btn-primary">
           Загрузить файл
+        </button>
+        <button type="button" id="cancelUploadButton" class="btn-delete">
+          Отменить загрузку
         </button>
       </form>
 
@@ -293,104 +296,109 @@
           let tableBody = $("#customerTableBody");
           tableBody.empty();
           customers.forEach(function (customer) {
-            let row = $("<tr></tr>");
-            row.append(
-              $("<td></td>").append(
-                $('<input type="checkbox" class="selectCustomer">').val(
-                  customer.id
-                )
+            let row = createCustomerRow(customer);
+            tableBody.prepend(row); // Добавляем новую строку в начало таблицы
+          });
+        }
+
+        function createCustomerRow(customer) {
+          let row = $("<tr></tr>");
+          row.append(
+            $("<td></td>").append(
+              $('<input type="checkbox" class="selectCustomer">').val(
+                customer.id
               )
-            );
+            )
+          );
+          row.append(
+            $("<td></td>")
+              .text(customer.id)
+              .click(function () {
+                window.location.href = "customer_card.html?id=" + customer.id;
+              })
+              .css("cursor", "pointer")
+          );
+          row.append($("<td></td>").text(customer.name));
+          row.append($("<td></td>").text(customer.surname));
+          row.append($("<td></td>").text(customer.email));
+          row.append($("<td></td>").text(customer.phone));
+          let registrationDate = new Date(customer.registration_date);
+          if (!isNaN(registrationDate.getTime())) {
             row.append(
               $("<td></td>")
-                .text(customer.id)
-                .click(function () {
-                  window.location.href = "customer_card.html?id=" + customer.id;
-                })
-                .css("cursor", "pointer")
+                .attr("data-date", registrationDate.toISOString())
+                .text(
+                  registrationDate.toLocaleString("ru-RU", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  })
+                )
             );
-            row.append($("<td></td>").text(customer.name));
-            row.append($("<td></td>").text(customer.surname));
-            row.append($("<td></td>").text(customer.email));
-            row.append($("<td></td>").text(customer.phone));
-            let registrationDate = new Date(customer.registration_date);
-            if (!isNaN(registrationDate.getTime())) {
-              row.append(
-                $("<td></td>")
-                  .attr("data-date", registrationDate.toISOString())
-                  .text(
-                    registrationDate.toLocaleString("ru-RU", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      second: "2-digit",
-                    })
-                  )
-              );
-            } else {
-              row.append($("<td></td>").text("Invalid Date"));
+          } else {
+            row.append($("<td></td>").text("Invalid Date"));
+          }
+
+          let editButton = $(
+            '<button class="btn-edit">Редактировать</button>'
+          ).click(function () {
+            let newDate = prompt(
+              "Введите новую дату в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС",
+              registrationDate.toISOString().slice(0, 19).replace("T", " ")
+            );
+            if (newDate) {
+              $.ajax({
+                type: "PUT",
+                url: "/update_customer_date",
+                data: JSON.stringify({
+                  id: customer.id,
+                  registration_date: newDate,
+                }),
+                contentType: "application/json",
+                success: function (response) {
+                  showAlert(response.message, 6000);
+                  loadCustomers();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.error(
+                    "Ошибка при обновлении даты регистрации:",
+                    textStatus,
+                    errorThrown
+                  );
+                },
+              });
             }
-
-            let editButton = $(
-              '<button class="btn-edit">Редактировать</button>'
-            ).click(function () {
-              let newDate = prompt(
-                "Введите новую дату в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС",
-                registrationDate.toISOString().slice(0, 19).replace("T", " ")
-              );
-              if (newDate) {
-                $.ajax({
-                  type: "PUT",
-                  url: "/update_customer_date",
-                  data: JSON.stringify({
-                    id: customer.id,
-                    registration_date: newDate,
-                  }),
-                  contentType: "application/json",
-                  success: function (response) {
-                    showAlert(response.message, 6000);
-                    loadCustomers();
-                  },
-                  error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(
-                      "Ошибка при обновлении даты регистрации:",
-                      textStatus,
-                      errorThrown
-                    );
-                  },
-                });
-              }
-            });
-
-            let deleteButton = $(
-              '<button class="btn-delete">Удалить</button>'
-            ).click(function () {
-              if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
-                $.ajax({
-                  type: "DELETE",
-                  url: "/delete_customer",
-                  data: JSON.stringify({ id: customer.id }),
-                  contentType: "application/json",
-                  success: function (response) {
-                    showAlert(response.message, 6000);
-                    row.remove();
-                  },
-                  error: function (jqXHR, textStatus, errorThrown) {
-                    console.error(
-                      "Ошибка при удалении кастомера:",
-                      textStatus,
-                      errorThrown
-                    );
-                  },
-                });
-              }
-            });
-
-            row.append($("<td></td>").append(editButton).append(deleteButton));
-            tableBody.append(row);
           });
+
+          let deleteButton = $(
+            '<button class="btn-delete">Удалить</button>'
+          ).click(function () {
+            if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
+              $.ajax({
+                type: "DELETE",
+                url: "/delete_customer",
+                data: JSON.stringify({ id: customer.id }),
+                contentType: "application/json",
+                success: function (response) {
+                  showAlert(response.message, 6000);
+                  row.remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.error(
+                    "Ошибка при удалении кастомера:",
+                    textStatus,
+                    errorThrown
+                  );
+                },
+              });
+            }
+          });
+
+          row.append($("<td></td>").append(editButton).append(deleteButton));
+          return row;
         }
 
         loadCustomers(); // Загрузка всех кастомеров при загрузке страницы
@@ -604,6 +612,13 @@
           if (this.files.length > 0) {
             uploadButton.addClass("flashing");
           }
+        });
+
+        // Обработчик для отмены загрузки файла
+        $("#cancelUploadButton").click(function () {
+          $("#excelFile").val(""); // Сброс выбранного файла
+          let uploadButton = $("#uploadButton");
+          uploadButton.removeClass("flashing"); // Убираем мигание
         });
 
         // Обработчик для открытия/закрытия меню управления колонками
