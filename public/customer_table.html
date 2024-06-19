@@ -201,7 +201,7 @@
       <button id="columnToggle">Управление колонками</button>
       <div id="columnManager">
         <ul id="sortableColumns">
-          <li data-column="0"><input type="checkbox" checked /> Выбрать все</li>
+          <li data-column="0"><input type="checkbox" /> Выбрать все</li>
           <li data-column="1"><input type="checkbox" checked /> ID</li>
           <li data-column="2"><input type="checkbox" checked /> Имя</li>
           <li data-column="3"><input type="checkbox" checked /> Фамилия</li>
@@ -569,6 +569,10 @@
         // Обработчик для открытия/закрытия меню управления колонками
         $("#columnToggle").click(function () {
           $("#columnManager").toggle();
+          $("#sortableColumns li[data-column='0'] input").prop(
+            "checked",
+            false
+          );
         });
 
         // Обработчик для управления колонками
@@ -604,11 +608,11 @@
           let column = $(this).closest("li").data("column");
           let isChecked = $(this).is(":checked");
           if (column === 0) {
-            $("th, td").toggle(isChecked);
             $("#sortableColumns input[type='checkbox']").prop(
               "checked",
               isChecked
             );
+            $("th, td").toggle(isChecked);
           } else {
             $(
               "th:nth-child(" +
@@ -621,10 +625,14 @@
         });
       });
 
-      //Клик в сторону для скрытия колонок
+      //Клик в сторону для скрытия колонок и сброса чекбокса "Выбрать все"
       $(document).click(function (event) {
         if (!$(event.target).closest("#columnManager, #columnToggle").length) {
           $("#columnManager").hide();
+          $("#sortableColumns li[data-column='0'] input").prop(
+            "checked",
+            false
+          );
         }
       });
     </script>
