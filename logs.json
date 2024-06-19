@@ -1,100 +1,28 @@
 [
   {
-    "id": 1718826756934,
-    "timestamp": "2024-06-19T19:52:36.934Z",
-    "method": "DELETE",
-    "url": "/delete_customers",
-    "body": {
-      "ids": [
-        "120",
-        "121",
-        "122",
-        "123",
-        "124",
-        "125",
-        "126",
-        "127",
-        "128",
-        "129",
-        "130",
-        "131",
-        "132",
-        "133",
-        "134"
-      ]
-    }
-  },
-  {
-    "id": 1718826792586,
-    "timestamp": "2024-06-19T19:53:12.586Z",
-    "method": "POST",
-    "url": "/register",
-    "body": {
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718826792701,
-    "timestamp": "2024-06-19T19:53:12.701Z",
-    "method": "GET",
-    "url": "/customer/135",
-    "body": {
-      "id": 135,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-19T19:53:12.573Z"
-    }
-  },
-  {
-    "id": 1718826795399,
-    "timestamp": "2024-06-19T19:53:15.399Z",
-    "method": "PUT",
-    "url": "/update_customer",
-    "body": {
-      "id": "135",
-      "name": "igora",
-      "surname": "soldout",
-      "email": "igora@gmail.com",
-      "phone": "0502584411"
-    }
-  },
-  {
-    "id": 1718826798528,
-    "timestamp": "2024-06-19T19:53:18.528Z",
+    "id": 1718828930704,
+    "timestamp": "2024-06-19T20:28:50.704Z",
     "method": "GET",
     "url": "/customers",
     "body": [
       {
-        "id": 135,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-19T19:53:12.573Z"
-      }
-    ]
-  },
-  {
-    "id": 1718826812126,
-    "timestamp": "2024-06-19T19:53:32.126Z",
-    "method": "GET",
-    "url": "/customers",
-    "body": [
-      {
-        "id": 135,
-        "name": "igora",
-        "email": "igora@gmail.com",
-        "phone": "0502584411",
-        "surname": "soldout",
-        "registration_date": "2024-06-19T19:53:12.573Z"
+        "id": 145,
+        "name": "qwe",
+        "email": "igordobkin222@gmail.com",
+        "phone": "972569873366",
+        "surname": "tre",
+        "registration_date": "2024-06-15 20:23:43"
       },
       {
-        "id": 136,
+        "id": 146,
+        "name": "igora",
+        "email": "igora@gmail.com",
+        "phone": "0502584411",
+        "surname": "soldout",
+        "registration_date": "2024-06-19T20:27:08.672Z"
+      },
+      {
+        "id": 147,
         "name": "Иван",
         "email": "ivanov@mail.com",
         "phone": "1234567890",
@@ -102,7 +30,7 @@
         "registration_date": "2024-06-18T08:30:00"
       },
       {
-        "id": 137,
+        "id": 148,
         "name": "Мария",
         "email": "marieva@mail.com",
         "phone": "6546546540.0",
@@ -110,7 +38,7 @@
         "registration_date": "2024-06-14T09:00:00"
       },
       {
-        "id": 138,
+        "id": 149,
         "name": "Сергей",
         "email": "sergeev@mail.com",
         "phone": "1231231234",
@@ -118,7 +46,7 @@
         "registration_date": "2024-06-16T15:45:00"
       },
       {
-        "id": 139,
+        "id": 150,
         "name": "Анна",
         "email": "annova@mail.com",
         "phone": "3213213210.0",
@@ -126,7 +54,7 @@
         "registration_date": "2024-06-15T10:00:00"
       },
       {
-        "id": 140,
+        "id": 151,
         "name": "Петр",
         "email": "petrov@mail.com",
         "phone": "987654321",
@@ -136,17 +64,195 @@
     ]
   },
   {
-    "id": 1718826853070,
-    "timestamp": "2024-06-19T19:54:13.070Z",
-    "method": "GET",
-    "url": "/customer/135",
+    "id": 1718828939779,
+    "timestamp": "2024-06-19T20:28:59.779Z",
+    "method": "DELETE",
+    "url": "/delete_customers",
     "body": {
-      "id": 135,
-      "name": "igora",
-      "email": "igora@gmail.com",
-      "phone": "0502584411",
-      "surname": "soldout",
-      "registration_date": "2024-06-19T19:53:12.573Z"
+      "ids": [
+        "145",
+        "146"
+      ]
     }
+  },
+  {
+    "id": 1718828945756,
+    "timestamp": "2024-06-19T20:29:05.756Z",
+    "method": "DELETE",
+    "url": "/delete_customer",
+    "body": {
+      "id": 147
+    }
+  },
+  {
+    "id": 1718828961729,
+    "timestamp": "2024-06-19T20:29:21.729Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 148,
+        "name": "Мария",
+        "email": "marieva@mail.com",
+        "phone": "6546546540.0",
+        "surname": "Мариева",
+        "registration_date": "2024-06-14T09:00:00"
+      },
+      {
+        "id": 149,
+        "name": "Сергей",
+        "email": "sergeev@mail.com",
+        "phone": "1231231234",
+        "surname": "Сергеев",
+        "registration_date": "2024-06-16T15:45:00"
+      },
+      {
+        "id": 150,
+        "name": "Анна",
+        "email": "annova@mail.com",
+        "phone": "3213213210.0",
+        "surname": "Аннова",
+        "registration_date": "2024-06-15T10:00:00"
+      },
+      {
+        "id": 151,
+        "name": "Петр",
+        "email": "petrov@mail.com",
+        "phone": "987654321",
+        "surname": "Петров",
+        "registration_date": "2024-06-17T12:00:00"
+      }
+    ]
+  },
+  {
+    "id": 1718828973866,
+    "timestamp": "2024-06-19T20:29:33.866Z",
+    "method": "DELETE",
+    "url": "/delete_customers",
+    "body": {
+      "ids": [
+        "148",
+        "149",
+        "150",
+        "151"
+      ]
+    }
+  },
+  {
+    "id": 1718828980715,
+    "timestamp": "2024-06-19T20:29:40.715Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": []
+  },
+  {
+    "id": 1718828992023,
+    "timestamp": "2024-06-19T20:29:52.023Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 152,
+        "name": "Иван",
+        "email": "ivanov@mail.com",
+        "phone": "1234567890",
+        "surname": "Иванов",
+        "registration_date": "2024-06-18T08:30:00"
+      },
+      {
+        "id": 153,
+        "name": "Петр",
+        "email": "petrov@mail.com",
+        "phone": "987654321",
+        "surname": "Петров",
+        "registration_date": "2024-06-17T12:00:00"
+      },
+      {
+        "id": 154,
+        "name": "Сергей",
+        "email": "sergeev@mail.com",
+        "phone": "1231231234",
+        "surname": "Сергеев",
+        "registration_date": "2024-06-16T15:45:00"
+      },
+      {
+        "id": 155,
+        "name": "Анна",
+        "email": "annova@mail.com",
+        "phone": "3213213210.0",
+        "surname": "Аннова",
+        "registration_date": "2024-06-15T10:00:00"
+      },
+      {
+        "id": 156,
+        "name": "Мария",
+        "email": "marieva@mail.com",
+        "phone": "6546546540.0",
+        "surname": "Мариева",
+        "registration_date": "2024-06-14T09:00:00"
+      }
+    ]
+  },
+  {
+    "id": 1718829014366,
+    "timestamp": "2024-06-19T20:30:14.366Z",
+    "method": "GET",
+    "url": "/customer/154",
+    "body": {
+      "id": 154,
+      "name": "Сергей",
+      "email": "sergeev@mail.com",
+      "phone": "1231231234",
+      "surname": "Сергеев",
+      "registration_date": "2024-06-16T15:45:00"
+    }
+  },
+  {
+    "id": 1718829016956,
+    "timestamp": "2024-06-19T20:30:16.956Z",
+    "method": "GET",
+    "url": "/customers",
+    "body": [
+      {
+        "id": 152,
+        "name": "Иван",
+        "email": "ivanov@mail.com",
+        "phone": "1234567890",
+        "surname": "Иванов",
+        "registration_date": "2024-06-18T08:30:00"
+      },
+      {
+        "id": 153,
+        "name": "Петр",
+        "email": "petrov@mail.com",
+        "phone": "987654321",
+        "surname": "Петров",
+        "registration_date": "2024-06-17T12:00:00"
+      },
+      {
+        "id": 154,
+        "name": "Сергей",
+        "email": "sergeev@mail.com",
+        "phone": "1231231234",
+        "surname": "Сергеев",
+        "registration_date": "2024-06-16T15:45:00"
+      },
+      {
+        "id": 155,
+        "name": "Анна",
+        "email": "annova@mail.com",
+        "phone": "3213213210.0",
+        "surname": "Аннова",
+        "registration_date": "2024-06-15T10:00:00"
+      },
+      {
+        "id": 156,
+        "name": "Мария",
+        "email": "marieva@mail.com",
+        "phone": "6546546540.0",
+        "surname": "Мариева",
+        "registration_date": "2024-06-14T09:00:00"
+      }
+    ]
   }
 ]
