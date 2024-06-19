@@ -156,6 +156,21 @@
         margin-right: 10px;
       }
 
+      #refreshColumns {
+        background-color: #6a0dad;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      #refreshColumns:hover {
+        background-color: #5a0cbe;
+      }
+
       /* Добавляем стили для кнопки при загрузке файла */
       #uploadButton.loading {
         background-color: #5a0cbe;
@@ -240,6 +255,7 @@
           </li>
           <li data-column="7"><input type="checkbox" checked /> Действия</li>
         </ul>
+        <button id="refreshColumns">Обновить</button>
       </div>
 
       <div style="overflow-x: auto">
@@ -279,6 +295,7 @@
       $(document).ready(function () {
         let sortOrder = "asc"; // Порядок сортировки: 'asc' или 'desc'
         let sortColumn = "id"; // Колонка сортировки: 'id' или 'date'
+        const defaultOrder = [0, 1, 2, 3, 4, 5, 6, 7]; // Дефолтное расположение колонок
 
         function loadCustomers() {
           $.get("/customers", function (data) {
@@ -638,6 +655,7 @@
                 return $(this).data("column");
               })
               .get();
+            headers = headers.map((h) => parseInt(h)); // Исправление
             let tableHeaders = $("thead tr th").toArray();
             tableHeaders.sort(function (a, b) {
               return (
@@ -677,6 +695,33 @@
                 ")"
             ).toggle(isChecked);
           }
+        });
+
+        // Обработчик для обновления колонок до дефолтного состояния
+        $("#refreshColumns").click(function () {
+          $("#sortableColumns input[type='checkbox']").prop("checked", true);
+          $("th, td").show();
+          // Восстанавливаем дефолтное расположение колонок
+          let headers = defaultOrder.map((h) => parseInt(h)); // Исправление
+          let tableHeaders = $("thead tr th").toArray();
+          tableHeaders.sort(function (a, b) {
+            return (
+              headers.indexOf(parseInt($(a).attr("data-column"))) -
+              headers.indexOf(parseInt($(b).attr("data-column"))) // Исправление
+            );
+          });
+          $("thead tr").empty().append(tableHeaders); // Исправление
+
+          $("#customerTableBody tr").each(function () {
+            let rowCells = $(this).find("td").toArray();
+            rowCells.sort(function (a, b) {
+              return (
+                headers.indexOf(parseInt($(a).attr("data-column"))) -
+                headers.indexOf(parseInt($(b).attr("data-column"))) // Исправление
+              );
+            });
+            $(this).empty().append(rowCells); // Исправление
+          });
         });
       });
 
