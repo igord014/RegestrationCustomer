@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Карточка кастомера</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      .main-container {
+        display: flex;
+        gap: 20px;
+      }
+      .container {
+        background-color: #fff;
+        max-width: 400px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      .card {
+        margin-top: 20px;
+        text-align: left;
+      }
+      .comment-section {
+        background-color: #fff;
+        max-width: 400px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        text-align: left;
+      }
+      .comment-input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+      .btn-send {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+      }
+      .btn-send:hover {
+        background-color: #0056b3;
+      }
+      .comment-list {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        max-height: 150px;
+        overflow-y: auto;
+      }
+      .comment {
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+      /* Existing styles */
+      .card-title {
+        font-size: 1.25rem;
+        color: #333;
+      }
+      .card-text {
+        font-size: 1rem;
+        color: #666;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      .form-group input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .btn-primary,
+      .btn-secondary {
+        border: none;
+        padding: 10px 20px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .btn-primary {
+        background-color: #6a0dad;
+      }
+      .btn-primary:hover {
+        background-color: #5a0cbe;
+      }
+      .btn-secondary {
+        background-color: #555;
+      }
+      .btn-secondary:hover {
+        background-color: #333;
+      }
+      .alert {
+        display: none;
+        margin-top: 20px;
+      }
+      .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="container">
+        <h1 class="text-center">Карточка кастомера</h1>
+        <div id="customerCard" class="card">
+          <div class="card-body">
+            <!-- Existing customer card fields -->
+            <div class="form-group">
+              <label for="customerId">ID кастомера:</label>
+              <input type="text" id="customerId" name="customerId" readonly />
+            </div>
+            <div class="form-group">
+              <label for="name">Имя:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="surname">Фамилия:</label>
+              <input type="text" id="surname" name="surname" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон:</label>
+              <input type="text" id="phone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <label for="registrationDate">Дата и время регистрации:</label>
+              <input type="text" id="registrationDate" name="registrationDate" readonly />
+            </div>
+            <button id="saveButton" class="btn-primary">Сохранить</button>
+            <button id="backButton" class="btn-secondary">Назад</button>
+            <div class="alert alert-success" id="successMessage">Данные успешно сохранены!</div>
+            <div class="alert alert-danger" id="errorMessage">Пожалуйста, заполните все поля.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comment Section -->
+      <div class="comment-section">
+        <h2>Комментарии</h2>
+        <input type="text" id="commentInput" class="comment-input" placeholder="Введите комментарий" />
+        <button id="sendButton" class="btn-send">Send</button>
+        <div id="commentList" class="comment-list"></div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Existing code for customer card
+        let urlParams = new URLSearchParams(window.location.search);
+        let customerId = urlParams.get("id");
+
+        function formatDate(date) {
+          const options = {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          };
+          return date.toLocaleString("ru-RU", options).replace(",", "");
+        }
+
+        if (customerId) {
+          $.get("/customer/" + customerId, function (data) {
+            if (data) {
+              $("#customerId").val(data.id);
+              $("#name").val(data.name);
+              $("#surname").val(data.surname);
+              $("#email").val(data.email);
+              $("#phone").val(data.phone);
+              if (data.registration_date) {
+                const formattedDate = formatDate(new Date(data.registration_date));
+                $("#registrationDate").val(formattedDate).prop("readonly", true);
+              } else {
+                let currentDate = formatDate(new Date());
+                $("#registrationDate").val(currentDate);
+              }
+            }
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("Ошибка при получении данных кастомера:", textStatus, errorThrown);
+          });
+        }
+
+        $("#saveButton").click(function () {
+          let id = $("#customerId").val();
+          let name = $("#name").val();
+          let surname = $("#surname").val();
+          let email = $("#email").val();
+          let phone = $("#phone").val();
+          let registrationDate = $("#registrationDate").val();
+
+          if (name === "" || surname === "" || email === "" || phone === "") {
+            $("#errorMessage").show().delay(3000).fadeOut();
+          } else {
+            console.log("Отправка данных на сервер: ", { id, name, surname, email, phone, registrationDate });
+            $.ajax({
+              type: "PUT",
+              url: "/update_customer",
+              data: JSON.stringify({ id, name, surname, email, phone, registrationDate }),
+              contentType: "application/json",
+              success: function (response) {
+                console.log("Успешно сохранено:", response.message);
+                $("#successMessage").text(response.message).show().delay(3000).fadeOut();
+                setTimeout(function () {
+                  window.location.href = "customer_table.html";
+                }, 3000);
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Ошибка при сохранении:", textStatus, errorThrown);
+                $("#errorMessage").text("Ошибка при сохранении данных").show().delay(3000).fadeOut();
+              },
+            });
+          }
+        });
+
+        $("#backButton").click(function () {
+          window.location.href = "customer_table.html";
+        });
+
+        // Comment section logic
+        $("#sendButton").click(function () {
+          let comment = $("#commentInput").val().trim();
+          if (comment !== "") {
+            $("<div class='comment'></div>").text(comment).appendTo("#commentList");
+            $("#commentInput").val("");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

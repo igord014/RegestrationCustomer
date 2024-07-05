@@ -1,0 +1,743 @@
+<!-- server:  https://handyhost.ru/hosting/ -->
+<!-- https://www.youtube.com/watch?v=AG6awwCQOog -->
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таблица кастомеров</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        height: 100vh;
+        padding: 10px;
+      }
+
+      .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        max-width: 100%;
+        overflow: auto;
+        position: relative;
+      }
+
+      .search-container {
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        align-items: center;
+      }
+
+      .search-container input {
+        margin-right: 10px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background-color: #6a0dad;
+        color: white;
+        cursor: pointer;
+        position: relative;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .sort-arrows {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        gap: 5px;
+      }
+
+      .sort-arrows span {
+        display: block;
+        font-size: 10px;
+        line-height: 10px;
+        cursor: pointer;
+      }
+
+      .btn-primary,
+      .btn-logs,
+      .btn-delete-all {
+        background-color: #6a0dad;
+        border: none;
+        padding: 5px 5px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        margin-right: 10px;
+      }
+
+      .btn-primary:hover,
+      .btn-logs:hover,
+      .btn-delete-all:hover {
+        background-color: #5a0cbe;
+      }
+
+      .btn-delete {
+        background-color: #ff6347;
+        border: none;
+        padding: 5px 10px;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+
+      .btn-delete:hover {
+        background-color: #ff4500;
+      }
+
+      #columnManager {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 1000; /* Add z-index to make it above other elements */
+      }
+
+      #columnManager ul {
+        list-style-type: none;
+        padding: 10px;
+        margin: 0;
+      }
+
+      #columnManager li {
+        margin-bottom: 5px;
+        padding: 5px;
+        background-color: #ddd;
+        border: 1px solid #ccc;
+        cursor: move;
+        display: flex;
+        align-items: center;
+      }
+
+      #columnManager li input {
+        margin-right: 10px;
+      }
+
+      #columnToggle {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background-color: #6a0dad;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-right: 10px;
+      }
+
+      #refreshColumns {
+        background-color: #6a0dad;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      #refreshColumns:hover {
+        background-color: #5a0cbe;
+      }
+
+      /* Добавляем стили для кнопки при загрузке файла */
+      #uploadButton.loading {
+        background-color: #5a0cbe;
+        cursor: not-allowed;
+      }
+
+      /* Добавляем мигание кнопке */
+      #uploadButton.flashing {
+        animation: flash 1s infinite;
+      }
+
+      @keyframes flash {
+        0% {
+          background-color: #6a0dad;
+        }
+        50% {
+          background-color: #32cd32; /* Зелёный цвет */
+        }
+        100% {
+          background-color: #6a0dad;
+        }
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="font-size: 1em">Таблица кастомеров</h1>
+      <div class="search-container">
+        <input type="text" id="searchId" placeholder="Поиск по ID" />
+        <button class="btn-primary" id="searchButton">Поиск</button>
+        <button class="btn-primary" id="clearSearchButton">
+          Очистить поиск
+        </button>
+      </div>
+      <button class="btn-logs" onclick="window.location.href='logs.html'">
+        Просмотреть логи
+      </button>
+      <button
+        class="btn-primary"
+        onclick="window.location.href='registration_form.html'"
+      >
+        Добавить кастомера
+      </button>
+      <button class="btn-delete-all" id="deleteSelected">
+        Удалить выбранные
+      </button>
+
+      <!-- Форма для загрузки файла Excel -->
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input
+          type="file"
+          id="excelFile"
+          name="excelFile"
+          accept=".xlsx, .xls"
+          required
+        />
+        <button type="submit" id="uploadButton" class="btn-primary">
+          Загрузить файл
+        </button>
+        <button type="button" id="cancelUploadButton" class="btn-delete">
+          Отменить загрузку
+        </button>
+      </form>
+
+      <button id="columnToggle">Управление колонками</button>
+      <div id="columnManager">
+        <ul id="sortableColumns">
+          <li data-column="0"><input type="checkbox" /> Выбрать все</li>
+          <li data-column="1"><input type="checkbox" checked /> ID</li>
+          <li data-column="2"><input type="checkbox" checked /> Имя</li>
+          <li data-column="3"><input type="checkbox" checked /> Фамилия</li>
+          <li data-column="4"><input type="checkbox" checked /> Email</li>
+          <li data-column="5"><input type="checkbox" checked /> Телефон</li>
+          <li data-column="6">
+            <input type="checkbox" checked /> Дата регистрации
+          </li>
+          <li data-column="7"><input type="checkbox" checked /> Действия</li>
+        </ul>
+        <button id="refreshColumns">Обновить</button>
+      </div>
+
+      <div style="overflow-x: auto">
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAll" /></th>
+              <th id="sortId">
+                ID
+                <div class="sort-arrows">
+                  <span id="sortAsc">&#9650;</span>
+                  <span id="sortDesc">&#9660;</span>
+                </div>
+              </th>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Email</th>
+              <th>Телефон</th>
+              <th id="sortDate">
+                Дата регистрации
+                <div class="sort-arrows">
+                  <span id="sortDateAsc">&#9650;</span>
+                  <span id="sortDateDesc">&#9660;</span>
+                </div>
+              </th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="customerTableBody">
+            <!-- Строки таблицы будут добавлены здесь с помощью JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        let sortOrder = "asc"; // Порядок сортировки: 'asc' или 'desc'
+        let sortColumn = "id"; // Колонка сортировки: 'id' или 'date'
+        const defaultOrder = [0, 1, 2, 3, 4, 5, 6, 7]; // Дефолтное расположение колонок
+
+        function loadCustomers() {
+          $.get("/customers", function (data) {
+            renderCustomers(data);
+          }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error(
+              "Ошибка при получении данных клиентов:",
+              textStatus,
+              errorThrown
+            );
+          });
+        }
+
+        function renderCustomers(customers) {
+          let tableBody = $("#customerTableBody");
+          tableBody.empty();
+          customers.forEach(function (customer) {
+            let row = createCustomerRow(customer);
+            tableBody.prepend(row); // Добавляем новую строку в начало таблицы
+          });
+        }
+
+        function createCustomerRow(customer) {
+          let row = $("<tr></tr>");
+          row.append(
+            $("<td></td>").append(
+              $('<input type="checkbox" class="selectCustomer">').val(
+                customer.id
+              )
+            )
+          );
+          row.append(
+            $("<td></td>")
+              .text(customer.id)
+              .click(function () {
+                window.location.href = "customer_card.html?id=" + customer.id;
+              })
+              .css("cursor", "pointer")
+          );
+          row.append($("<td></td>").text(customer.name));
+          row.append($("<td></td>").text(customer.surname));
+          row.append($("<td></td>").text(customer.email));
+          row.append($("<td></td>").text(customer.phone));
+          let registrationDate = new Date(customer.registration_date);
+          if (!isNaN(registrationDate.getTime())) {
+            row.append(
+              $("<td></td>")
+                .attr("data-date", registrationDate.toISOString())
+                .text(
+                  registrationDate.toLocaleString("ru-RU", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  })
+                )
+            );
+          } else {
+            row.append($("<td></td>").text("Invalid Date"));
+          }
+
+          let editButton = $(
+            '<button class="btn-edit">Редактировать</button>'
+          ).click(function () {
+            let newDate = prompt(
+              "Введите новую дату в формате ГГГГ-ММ-ДД ЧЧ:ММ:СС",
+              registrationDate.toISOString().slice(0, 19).replace("T", " ")
+            );
+            if (newDate) {
+              $.ajax({
+                type: "PUT",
+                url: "/update_customer_date",
+                data: JSON.stringify({
+                  id: customer.id,
+                  registration_date: newDate,
+                }),
+                contentType: "application/json",
+                success: function (response) {
+                  showAlert(response.message, 6000);
+                  loadCustomers();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.error(
+                    "Ошибка при обновлении даты регистрации:",
+                    textStatus,
+                    errorThrown
+                  );
+                },
+              });
+            }
+          });
+
+          let deleteButton = $(
+            '<button class="btn-delete">Удалить</button>'
+          ).click(function () {
+            if (confirm("Вы уверены, что хотите удалить этого кастомера?")) {
+              $.ajax({
+                type: "DELETE",
+                url: "/delete_customer",
+                data: JSON.stringify({ id: customer.id }),
+                contentType: "application/json",
+                success: function (response) {
+                  showAlert(response.message, 6000);
+                  row.remove();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  console.error(
+                    "Ошибка при удалении кастомера:",
+                    textStatus,
+                    errorThrown
+                  );
+                },
+              });
+            }
+          });
+
+          row.append($("<td></td>").append(editButton).append(deleteButton));
+          return row;
+        }
+
+        loadCustomers(); // Загрузка всех кастомеров при загрузке страницы
+
+        // Обработчик для выбора всех чекбоксов
+        $("#selectAll").click(function () {
+          $(".selectCustomer").prop("checked", this.checked);
+        });
+
+        // Обработчик для кнопки "Удалить выбранные"
+        $("#deleteSelected").click(function () {
+          let selectedIds = [];
+          $(".selectCustomer:checked").each(function () {
+            selectedIds.push($(this).val());
+          });
+
+          if (
+            selectedIds.length > 0 &&
+            confirm("Вы уверены, что хотите удалить выбранных кастомеров?")
+          ) {
+            $.ajax({
+              type: "DELETE",
+              url: "/delete_customers",
+              data: JSON.stringify({ ids: selectedIds }),
+              contentType: "application/json",
+              success: function (response) {
+                $(".selectCustomer:checked").closest("tr").remove();
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                console.error(
+                  "Ошибка при удалении выбранных кастомеров:",
+                  textStatus,
+                  errorThrown
+                );
+              },
+            });
+          }
+        });
+
+        // Обработчик для кнопки "Поиск"
+        $("#searchButton").click(function () {
+          let searchId = $("#searchId").val();
+          if (searchId) {
+            $.get("/customer/" + searchId, function (data) {
+              renderCustomers([data]); // Очищаем таблицу и рендерим результат поиска
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+              console.error(
+                "Ошибка при поиске клиента:",
+                textStatus,
+                errorThrown
+              );
+            });
+          }
+        });
+
+        // Обработчик для кнопки "Очистить поиск"
+        $("#clearSearchButton").click(function () {
+          $("#searchId").val("");
+          loadCustomers();
+        });
+
+        // Обработчик для ввода в поле поиска
+        $("#searchId").on("input", function () {
+          if ($(this).val() === "") {
+            loadCustomers();
+          }
+        });
+
+        // Обработчик для поиска по Enter
+        $("#searchId").keypress(function (e) {
+          if (e.which === 13) {
+            $("#searchButton").click();
+          }
+        });
+
+        // Функция для временного уведомления
+        function showAlert(message, duration) {
+          var alertBox = document.createElement("div");
+          alertBox.style.position = "fixed";
+          alertBox.style.top = "10px";
+          alertBox.style.right = "10px";
+          alertBox.style.transform = "translateX(-50%)";
+          alertBox.style.backgroundColor = "green";
+          alertBox.style.color = "white";
+          alertBox.style.padding = "10px 20px";
+          alertBox.style.borderRadius = "5px";
+          alertBox.style.boxShadow = "0 0 10px rgba(0,0,0,0.5)";
+          alertBox.style.zIndex = "1000";
+          alertBox.innerText = message;
+          document.body.appendChild(alertBox);
+
+          setTimeout(function () {
+            document.body.removeChild(alertBox);
+          }, duration);
+        }
+
+        // Обработчик для сортировки по ID
+        $("#sortAsc").click(function () {
+          sortOrder = "asc";
+          sortColumn = "id";
+          sortTable();
+        });
+
+        $("#sortDesc").click(function () {
+          sortOrder = "desc";
+          sortColumn = "id";
+          sortTable();
+        });
+
+        // Обработчик для сортировки по дате
+        $("#sortDateAsc").click(function () {
+          sortOrder = "asc";
+          sortColumn = "date";
+          sortTable();
+        });
+
+        $("#sortDateDesc").click(function () {
+          sortOrder = "desc";
+          sortColumn = "date";
+          sortTable();
+        });
+
+        function sortTable() {
+          let tableBody = $("#customerTableBody");
+          let rows = tableBody.find("tr").toArray();
+          rows.sort(function (a, b) {
+            if (sortColumn === "id") {
+              let aId = parseInt($(a).find("td:nth-child(2)").text());
+              let bId = parseInt($(b).find("td:nth-child(2)").text());
+              return sortOrder === "asc" ? aId - bId : bId - aId;
+            } else if (sortColumn === "date") {
+              let aDate = new Date(
+                $(a).find("td:nth-child(7)").attr("data-date")
+              );
+              let bDate = new Date(
+                $(b).find("td:nth-child(7)").attr("data-date")
+              );
+              return sortOrder === "asc" ? aDate - bDate : bDate - aDate;
+            }
+          });
+          tableBody.empty().append(rows);
+
+          // Перепривязка событий удаления после сортировки
+          rows.forEach(function (row) {
+            $(row)
+              .find(".btn-delete")
+              .click(function () {
+                let customerId = $(this)
+                  .closest("tr")
+                  .find("td:nth-child(2)")
+                  .text();
+                if (
+                  confirm("Вы уверены, что хотите удалить этого кастомера?")
+                ) {
+                  $.ajax({
+                    type: "DELETE",
+                    url: "/delete_customer",
+                    data: JSON.stringify({ id: customerId }),
+                    contentType: "application/json",
+                    success: function (response) {
+                      showAlert(response.message, 6000);
+                      $(row).remove();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                      console.error(
+                        "Ошибка при удалении кастомера:",
+                        textStatus,
+                        errorThrown
+                      );
+                    },
+                  });
+                }
+              });
+          });
+        }
+
+        // Обработчик для загрузки файла Excel
+        $("#uploadForm").submit(function (e) {
+          e.preventDefault();
+          let formData = new FormData(this);
+
+          let uploadButton = $("#uploadButton");
+          uploadButton.addClass("loading"); // Добавляем класс для анимации
+          uploadButton.removeClass("flashing"); // Убираем мигание после загрузки
+
+          $.ajax({
+            type: "POST",
+            url: "/upload_excel",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+              showAlert(response.message, 6000);
+              loadCustomers();
+              uploadButton.removeClass("loading"); // Убираем класс после загрузки
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error(
+                "Ошибка при загрузке файла:",
+                textStatus,
+                errorThrown
+              );
+              uploadButton.removeClass("loading"); // Убираем класс при ошибке
+            },
+          });
+        });
+
+        // Добавляем событие изменения файла, чтобы начать мигание кнопки
+        $("#excelFile").change(function () {
+          let uploadButton = $("#uploadButton");
+          if (this.files.length > 0) {
+            uploadButton.addClass("flashing");
+          }
+        });
+
+        // Обработчик для отмены загрузки файла
+        $("#cancelUploadButton").click(function () {
+          $("#excelFile").val(""); // Сброс выбранного файла
+          let uploadButton = $("#uploadButton");
+          uploadButton.removeClass("flashing"); // Убираем мигание
+        });
+
+        // Обработчик для открытия/закрытия меню управления колонками
+        $("#columnToggle").click(function () {
+          $("#columnManager").toggle();
+          $("#sortableColumns li[data-column='0'] input").prop(
+            "checked",
+            false
+          );
+        });
+
+        // Обработчик для управления колонками
+        $("#sortableColumns").sortable({
+          stop: function (event, ui) {
+            let headers = $("#sortableColumns li")
+              .map(function () {
+                return $(this).data("column");
+              })
+              .get();
+            headers = headers.map((h) => parseInt(h)); // Исправление
+            let tableHeaders = $("thead tr th").toArray();
+            tableHeaders.sort(function (a, b) {
+              return (
+                headers.indexOf($(a).index()) - headers.indexOf($(b).index())
+              );
+            });
+            $("thead tr").append(tableHeaders);
+
+            $("#customerTableBody tr").each(function () {
+              let rowCells = $(this).find("td").toArray();
+              rowCells.sort(function (a, b) {
+                return (
+                  headers.indexOf($(a).index()) - headers.indexOf($(b).index())
+                );
+              });
+              $(this).append(rowCells);
+            });
+          },
+        });
+
+        // Обработчик для скрытия/показа колонок
+        $("#sortableColumns input[type='checkbox']").change(function () {
+          let column = $(this).closest("li").data("column");
+          let isChecked = $(this).is(":checked");
+          if (column === 0) {
+            $("#sortableColumns input[type='checkbox']").prop(
+              "checked",
+              isChecked
+            );
+            $("th, td").toggle(isChecked);
+          } else {
+            $(
+              "th:nth-child(" +
+                (column + 1) +
+                "), td:nth-child(" +
+                (column + 1) +
+                ")"
+            ).toggle(isChecked);
+          }
+        });
+
+        // Обработчик для обновления колонок до дефолтного состояния
+        $("#refreshColumns").click(function () {
+          $("#sortableColumns input[type='checkbox']").prop("checked", true);
+          $("th, td").show();
+          // Восстанавливаем дефолтное расположение колонок
+          let headers = defaultOrder.map((h) => parseInt(h)); // Исправление
+          let tableHeaders = $("thead tr th").toArray();
+          tableHeaders.sort(function (a, b) {
+            return (
+              headers.indexOf(parseInt($(a).attr("data-column"))) -
+              headers.indexOf(parseInt($(b).attr("data-column"))) // Исправление
+            );
+          });
+          $("thead tr").empty().append(tableHeaders); // Исправление
+
+          $("#customerTableBody tr").each(function () {
+            let rowCells = $(this).find("td").toArray();
+            rowCells.sort(function (a, b) {
+              return (
+                headers.indexOf(parseInt($(a).attr("data-column"))) -
+                headers.indexOf(parseInt($(b).attr("data-column"))) // Исправление
+              );
+            });
+            $(this).empty().append(rowCells); // Исправление
+          });
+        });
+      });
+
+      //Клик в сторону для скрытия колонок и сброса чекбокса "Выбрать все"
+      $(document).click(function (event) {
+        if (!$(event.target).closest("#columnManager, #columnToggle").length) {
+          $("#columnManager").hide();
+          $("#sortableColumns li[data-column='0'] input").prop(
+            "checked",
+            false
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
